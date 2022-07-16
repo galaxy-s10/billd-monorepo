@@ -1,0 +1,102 @@
+@use 'sass:math';
+@import '_constance.scss';
+@import '_common.scss';
+@import '_utils.scss';
+@import '_mixin.scss';
+// @import 'aaa.css'; //最终生成的css会原封不动的带上这个语句，而不是把aaa.css里面的样式都带进来。
+
+// css滤镜：https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter
+$version: '1.0.0';
+
+/* 注意：$dark-primary-color是scss语法，
+var是css函数，--theme-dark-color是css自定义属性
+如果--dark-primary-color定义了，则使用--dark-primary-color，
+否则，会使用回退值：'#225384'
+*/
+$dark-primary-color: var(--dark-primary-color, '#225384');
+$light-primary-color: var(--light-primary-color, '#845cc3');
+
+// 这段注释会被删除
+/* 这段注释不会被删除,但是压缩模式下还是会被删除 */
+/* 允许插值：当前版本：#{$version},1+2=#{1+2},10*5=#{10*5} */
+/*! 这段注释在压缩模式下也不会被删除,常用于声明版权 */
+
+.flex-wrap {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.txt1 {
+  @include multiEllipsis(3);
+}
+
+.left-arrow {
+  @include arrow('left');
+}
+.right-arrow {
+  @include arrow('right');
+}
+.top-arrow {
+  @include arrow('top');
+}
+.bottom-arrow {
+  @include arrow('bottom');
+}
+
+.color-text1 {
+  font-size: 50px;
+  animation: text-flash-move1 2.5s infinite ease;
+
+  @include colorText(
+    $color:
+      '#E02020 0%, #FA6400 17%, #F7B500 33%, #6DD400 50%, #0091FF 67%, #6236FF 83%, #B620E0 100%',
+    $position: '270deg'
+  );
+  @keyframes text-flash-move1 {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+    100% {
+      filter: hue-rotate(100deg);
+    }
+  }
+}
+.color-text2 {
+  @include colorText('#009fff, #ec2f4b', 'to bottom');
+}
+.color-text3 {
+  @include colorText('#8a2387, #e94057, #f27121', '50deg');
+}
+
+.shadow1 {
+  @include shadow('rgb(236,245, 255, 0.2)');
+}
+.blur1 {
+  @include blur(4px);
+}
+
+.loading1 {
+  @include loading-rotate();
+}
+.loading2 {
+  @include loading-rotate($px: 20px);
+}
+.loading3 {
+  @include loading-rotate($color: blue);
+}
+.loading4 {
+  @include loading-rotate(20px, green);
+}
+.loading5 {
+  @include loading-size();
+}
+.loading6 {
+  @include loading-size($px: 20px);
+}
+.loading7 {
+  @include loading-size($color: blue);
+}
+.loading8 {
+  @include loading-size(20px, green);
+}

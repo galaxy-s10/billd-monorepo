@@ -1,0 +1,77 @@
+/* less的mixin和普通的class类差不多，区别是mixin可以加括号，如果mixin加了括号，就不会输出这个mixin，而普通class类是一定会输出的 */
+
+// 定义mixin,加上括号则不会把这个mixin输出
+.logo() {
+  // 其实这个mixin其实和普通class类没啥区别，唯一区别就是这个是mixin，不管有没有人用它，它都不会单独输出，谁用它就输出到用的地方里面
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+// 定义mixin,不加括号的会把这个mixin输出一份（其实mixin不加括号，就是一个普通的class类，当然会被输出）
+.logo1 {
+  // 其实这个mixin完全就是普通的class
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+// 设置背景
+.setBackground(
+  @url,
+  @x: center,
+  @y: center,
+  @repeat: no-repeat,
+  @size: contain
+) {
+  background-image: url(@url);
+  background-position: @x @y;
+  background-size: @size;
+  background-repeat: @repeat;
+}
+
+// 设置绝对定位位置
+.setPosition(
+  @top: initial,
+  @right: initial,
+  @bottom: initial,
+  @left: initial
+) {
+  position: absolute;
+  top: @top;
+  right: @right;
+  bottom: @bottom;
+  left: @left;
+}
+
+// 充满屏幕
+.fullBox(@position: absolute) {
+  position: @position;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.px2vw(@property, @px) {
+  @{property}: (@px / 375) * 100vw;
+}
+
+// 下面的写法相比上面的px2vw更加的不优雅，且要开启javascriptEnabled:true,因此不用这个方式了。
+// .px2vwFn(){
+//   @functions:~`(px2vw = function(px) { return (px / 375) * 100 + 'vw'; })()`
+// }
+// .px2vwFn();
+
+// 多行省略号
+.multiEllipsis(@row) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  text-overflow: -o-ellipsis-lastline;
+  text-overflow: ellipsis;
+  word-break: break-all;
+
+  -webkit-line-clamp: (@row);
+  line-clamp: (@row);
+}

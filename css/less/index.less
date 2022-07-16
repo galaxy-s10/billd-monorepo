@@ -1,0 +1,82 @@
+// @import '_constance.less';
+// @import '_common.less';
+// @import '_utils.less';
+@import '_mixin.less';
+@import 'aaa.css'; //最终生成的css会原封不动的带上这个语句，而不是把aaa.css里面的样式都带进来。
+
+// css滤镜：https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter
+@version: '1.0.0'; //定义变量
+
+@dark-primary-color: var(--dark-primary-color, '#225384');
+@light-primary-color: var(--light-primary-color, '#845cc3');
+
+// 编译后这段注释会被删除
+/* 编译后这段注释不会被删除 */
+
+.mask {
+  .fullBox('fixed'); //使用mixin
+  .logo();
+}
+.text1 {
+  width: 100px;
+
+  .multiEllipsis(3); //使用mixin
+}
+
+.logoimg {
+  // .logo1; //使用mixin时，括号是可选的，但是可选括号在未来的版本将弃用！
+  .logo1(); //使用mixin;
+}
+
+.div3 {
+  // .logo1();
+  .setBackground('https://rec.4funvideo.com/u/Offline-customer-Angel-Prashant-gift.png'); //使用mixin
+  // color: @dark-primary-color;
+}
+
+.div2 {
+  // 加减乘除，最好符号两边都加空格！less4.x后，除法需要括号括起来（推荐），或者将/换成./。https://github.com/less/less.js/pull/3573
+  width: 10px + 20px; //30px
+  width: 10px+22; //32px
+  width: 10px+32px; //42px
+  width: 10px +24px; //10px 24px;
+  width: 10px- 2px; //8px
+  width: 10px -32px; //10px -32px
+  height: 10 * 2px; //20px
+  height: 10px / 2px; //10px / 2px
+  height: 10 / 2px; //10 / 2px
+  height: (10 / 2px); //5px
+  height: (10px / 5px); //2px
+  // height: 20px ./ 5px; //4px
+  // height: 12px ./ 4; //3px
+  height: (10 / 5); //2
+  height: (10 / 5) px; //2 px
+}
+
+.container {
+  // &:extend(.logo); //extend继承
+  background-color: rebeccapurple;
+}
+
+.top {
+  background-color: skyblue;
+
+  .px2vw(height,10);
+  .px2vw(width,10);
+}
+
+.flexbox {
+  background-color: khaki;
+
+  &:extend(.flexCenter);
+}
+
+.article {
+  font: optional;
+  // top: math.ceil(3.1px); //向上取整,4px
+  // right: math.floor($number: 3.9px); //向下取整,3px
+  // bottom: math.ceil(3.9px); //向上取整,4px
+  // left: math.floor($number: 3.1px); //向下取整,3px
+
+  &:extend(.xxgg);
+}

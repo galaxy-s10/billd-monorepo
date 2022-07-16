@@ -1,0 +1,139 @@
+// 水平垂直居中
+.flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 解决图片缩小模糊问题
+.imgBlur {
+  -ms-interpolation-mode: nearest-neighbor;
+
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+// 单行省略号
+.singleEllipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多行省略号在mixin里面
+
+// ltr
+.ltr {
+  direction: ltr;
+}
+
+// rtl
+.rtl {
+  direction: rtl;
+}
+
+// 置灰
+.grayscale {
+  filter: grayscale(100%);
+}
+
+// 隐藏滚动条:https://developer.mozilla.org/zh-CN/docs/Web/CSS/::-webkit-scrollbar
+.hideScrollbar {
+  // 整个滚动条
+  &::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 0px;
+  }
+
+  // 滚动条轨道
+  &::-webkit-scrollbar-track {
+    box-shadow: rgba(0, 0, 0, 0);
+    border-radius: 0px;
+    background: rgba(0, 0, 0, 0);
+  }
+
+  // 滚动条上的滚动滑块
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background: transparent;
+  }
+}
+
+// 图片闪光
+.img-flash {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 20%;
+    height: 150%;
+    background: white;
+    content: '';
+    opacity: 0.6;
+    filter: blur(6px);
+    animation: img-flash-move 1s infinite ease-out;
+    @keyframes img-flash-move {
+      0% {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+      100% {
+        transform: translate(50%, 80%) rotate(45deg);
+      }
+    }
+  }
+}
+
+// 文字闪光
+.text-flash {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 10%;
+    height: 150%;
+    background: white;
+    content: '';
+    opacity: 0.6;
+    filter: blur(6px);
+    transform: translateY(-20%) rotate(45deg);
+    animation: text-flash-move 3s infinite ease;
+    @keyframes text-flash-move {
+      0% {
+        left: 0;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+  }
+}
+
+// 长文本折行
+.long-text {
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+// float清除浮动
+.clearfix {
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
