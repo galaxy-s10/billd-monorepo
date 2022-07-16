@@ -7,9 +7,32 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cz": "cz",
+    "lint": "eslint --config ./.eslintrc.js . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint --config ./.eslintrc.js . --ext .js,.jsx,.ts,.tsx --fix",
+    "prepare": "husky install",
+    "prettier": "prettier --write .",
+    "release": "standard-version"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "devDependencies": {
-    "chalk": "^2.2.0"
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "@typescript-eslint/parser": "^5.30.6",
+    "chalk": "^4",
+    "commitizen": "^4.2.4",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.19.0",
+    "eslint-plugin-import": "^2.26.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "node-emoji": "^1.11.0",
+    "prettier": "^2.7.1",
+    "standard-version": "^9.5.0"
   }
 }

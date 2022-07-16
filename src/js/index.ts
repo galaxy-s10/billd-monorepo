@@ -1,4 +1,3 @@
-```typescript
 /** 删除对象中值为: null, undefined, NaN, ''的属性 */
 export const deleteNullObjectKey = (obj: any) => {
   Object.keys(obj).forEach((key) => {
@@ -105,25 +104,21 @@ export const deepClone = <T>(obj: T): T => {
   return clone(obj, undefined);
 };
 
-/** 判断字符串的开头和结尾是否有空格，有空格就返回true，否则返回false */
-export const judgeStringSpace = (value: string): boolean => {
-  const reg1 = /^\s+/g; // 匹配开头空格
-  const reg2 = /\s+$/g; // 匹配结尾空格
-  if (reg1.test(value) || reg2.test(value)) {
-    return true;
-  }
-  return false;
-};
-
 /**
- * 获取[min,max]之间的随机整数
- * 例如：[10,30],[-21,32],[-100,-20]
+ * @description:  * 获取[min,max]之间的随机整数。如：[10,30],[-21,32],[-100,-20]
+ * @param {number} min
+ * @param {number} max
+ * @return {*}
  */
 export const getRandomInt = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
-/** 获取随机字符串 */
-export const randomString = (length: number): string => {
+/**
+ * @description: 获取随机字符串
+ * @param {number} length
+ * @return {*}
+ */
+export const getRandomString = (length: number): string => {
   const str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let res = '';
   for (let i = 0; i < length; i += 1) {
@@ -133,27 +128,10 @@ export const randomString = (length: number): string => {
 };
 
 /**
- * 时间戳转换成日期
- * 将new Date()或时间戳转换为："2020-10-01 12:24:03"
- * 不能传"2020-10-01",会转成"2020-10-01 08:00:00"
+ * @description: 将内容复制到剪切板
+ * @param {string} text
+ * @return {*}
  */
-export const formatTime = (v: string | number) => {
-  const date = new Date(v);
-  const y = date.getFullYear();
-  let m: any = date.getMonth() + 1;
-  m = m < 10 ? `0${m}` : m;
-  let d: any = date.getDate();
-  d = d < 10 ? `0${d}` : d;
-  let h: any = date.getHours();
-  h = h < 10 ? `0${h}` : h;
-  let minute: any = date.getMinutes();
-  let second: any = date.getSeconds();
-  minute = minute < 10 ? `0${minute}` : minute;
-  second = second < 10 ? `0${second}` : second;
-  return `${y}-${m}-${d} ${h}:${minute}:${second}`;
-};
-
-/** 将内容复制到剪切板 */
 export const copyToClipBoard = (text: string): void => {
   const oInput = document.createElement('input');
   oInput.value = text;
@@ -182,4 +160,3 @@ export const isBrowser = (): boolean =>
   typeof window !== 'undefined' &&
   typeof window.document !== 'undefined' &&
   typeof window.document.createElement !== 'undefined';
-```
