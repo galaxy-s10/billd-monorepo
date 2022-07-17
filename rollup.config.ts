@@ -2,6 +2,7 @@ import path from 'path';
 import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import { DEFAULT_EXTENSIONS } from '@babel/core';
+import typescript from 'rollup-plugin-typescript2';
 
 const output = path.resolve(__dirname, './lib');
 export default {
@@ -22,6 +23,7 @@ export default {
     },
   ],
   plugins: [
+    typescript(),
     resolve(),
     babel({
       exclude: 'node_modules/**', // 只编译我们的源代码

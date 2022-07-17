@@ -1,3 +1,5 @@
-console.log('hi');
-const aa = 214;
-console.log(aa);
+// import { judgeType } from './js';
+// // getStyle();
+// console.log(judgeType(2));
+
+export { judgeType } from './js/index';
