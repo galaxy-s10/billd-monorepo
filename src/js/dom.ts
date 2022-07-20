@@ -14,3 +14,13 @@ export const getStyle = (ele: Element, styleName: string) => {
     return ele.currentStyle[styleName];
   }
 };
+
+export const getStyle2 = (ele: Element, styleName: string) => {
+  if (window.getComputedStyle) {
+    return window.getComputedStyle(ele, null)[styleName];
+  } else {
+    // 兼容ie
+    // @ts-ignore
+    return ele.currentStyle[styleName];
+  }
+};
