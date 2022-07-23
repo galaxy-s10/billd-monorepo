@@ -8,9 +8,25 @@ export const deleteNullObjectKey = (obj: any) => {
 };
 
 /**
+ * @description: 替换占位符
+ * @param {string} str
+ * @param {object} obj
+ * @example replaceKeyFromValue(`Hello {name}`,{name:'Word'})=>Hello Word
+ * @return {*}
+ */
+export const replaceKeyFromValue = (str: string, obj: object) => {
+  Object.keys(obj).forEach((v) => {
+    // eslint-disable-next-line
+    str = str.replace(new RegExp(`{${v}}`, 'ig'), obj[v]);
+  });
+  return str;
+};
+
+/**
  * 判断数据类型
  * https://github.com/iview/iview/blob/2.0/src/utils/assist.js
  */
+
 export const judgeType = (obj: any): string => {
   const { toString } = Object.prototype;
   const map = {
@@ -83,9 +99,10 @@ export const deepCloneByJson = <T>(obj: T): T =>
   JSON.parse(JSON.stringify(obj));
 
 /** 手写深拷贝，解决循环引用 */
-export const deepClone = <T>(obj: T): T => {
-  function clone(obj: any, hash: WeakMap<object, any> | undefined) {
+export const deepClone = <T>(val: T): T => {
+  function clone(obj: any, hash: any) {
     const newobj: any = Array.isArray(obj) ? [] : {};
+    // eslint-disable-next-line
     hash = hash || new WeakMap();
     if (hash.has(obj)) {
       return hash.get(obj);
@@ -101,7 +118,7 @@ export const deepClone = <T>(obj: T): T => {
     });
     return newobj;
   }
-  return clone(obj, undefined);
+  return clone(val, undefined);
 };
 
 /**
@@ -160,3 +177,84 @@ export const isBrowser = (): boolean =>
   typeof window !== 'undefined' &&
   typeof window.document !== 'undefined' &&
   typeof window.document.createElement !== 'undefined';
+
+/**
+ * @description: 防抖函数（Promise）
+ * @param {Function} fn 函数
+ * @param {number} delay 延迟时间
+ * @param {boolean} leading 首次立即执行
+ * @return {Promise}
+ */
+export const debounce = (fn: Function, delay: number, leading = false) => {
+  let timer;
+  const debounceFn = function () {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    // @ts-ignore
+    const _this = this;
+    const _arguments = arguments;
+    return new Promise((resolve) => {
+      if (leading) {
+        let isFirst = false;
+        if (!timer) {
+          resolve(fn.apply(_this, _arguments));
+          isFirst = true;
+        }
+        timer = setTimeout(() => {
+          timer = null;
+          if (!isFirst) {
+            resolve(fn.apply(_this, _arguments));
+          }
+        }, delay);
+      } else {
+        timer = setTimeout(() => {
+          resolve(fn.apply(_this, _arguments));
+        }, delay);
+      }
+    });
+  };
+
+  debounceFn.cancel = function () {
+    clearTimeout(timer);
+    timer = null;
+  };
+  return debounceFn;
+};
+
+/**
+ * @description: 节流函数（Promise）
+ * @param {Function} fn 函数
+ * @param {number} interval 间隔
+ * @param {boolean} trailing 最后一次执行
+ * @return {Promise}
+ */
+export const throttle = (fn: Function, interval: number, trailing = false) => {
+  let lastTime = 0;
+  let timer;
+  return function () {
+    // @ts-ignore
+    const _this = this;
+    const _arguments = arguments;
+    const newTime = new Date().getTime();
+
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    let result;
+    return new Promise((resolve) => {
+      if (newTime - lastTime > interval) {
+        result = fn.apply(_this, _arguments);
+        resolve(result);
+
+        lastTime = newTime;
+      } else if (trailing) {
+        timer = setTimeout(() => {
+          result = fn.apply(_this, _arguments);
+          resolve(result);
+        }, interval);
+      }
+    });
+  };
+};

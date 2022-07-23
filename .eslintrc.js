@@ -72,7 +72,7 @@ module.exports = {
             // 根据导入路径按字母顺序对每个组内的顺序进行排序
             alphabetize: {
               order: 'asc' /* 按升序排序。选项：['ignore', 'asc', 'desc'] */,
-              caseInsensitive: true /* 忽略大小写。选项：[true, false] */,
+              caseInsensitive: false /* 忽略大小写。选项：[true, false] */,
             },
           },
         ],

@@ -1,5 +1,5 @@
 {
-  "name": "billd-use",
+  "name": "@huangshuisheng/utils",
   "version": "0.0.0",
   "description": "billd's utils",
   "keywords": [
@@ -8,29 +8,19 @@
     "javascript",
     "css"
   ],
-  "homepage": "http://project.hsslive.cn/billd-use/",
+  "homepage": "http://project.hsslive.cn/billd-use",
   "bugs": {
     "url": "https://github.com/galaxy-s10/billd-use/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/galaxy-s10/billd-use"
+    "url": "https://github.com/galaxy-s10/billd-use",
+    "directory": "packages/utils"
   },
   "license": "ISC",
   "author": "galaxy-s10",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "scripts": {
-    "build": "npm run clean & rollup -c rollup.config.ts",
-    "clean": "rm -rf ./lib",
-    "cz": "cz",
-    "doc": "typedoc --options ./typedoc.config.json",
-    "lint": "eslint --config ./.eslintrc.js . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint --config ./.eslintrc.js . --ext .js,.jsx,.ts,.tsx --fix",
-    "prepare": "husky install",
-    "prettier": "prettier --write .",
-    "release": "standard-version"
-  },
+  "main": "utils/index.cjs",
+  "module": "utils/index.mjs",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
