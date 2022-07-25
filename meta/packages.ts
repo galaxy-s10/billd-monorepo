@@ -3,6 +3,6 @@ export const packages = [
   {
     name: 'utils',
     description: "Billd's utils",
-    author: 'galaxy-s10 <https://github.com/galaxy-s10>',
+    author: 'shuisheng <https://github.com/galaxy-s10>',
   },
 ];

@@ -9,20 +9,11 @@ import typescript from 'rollup-plugin-typescript2';
 
 import pkg from '../package.json';
 
-const babelRuntimeVersion = pkg.dependencies['@babel/runtime'].replace(
-  /^[^0-9]*/,
-  ''
-);
-
 const external = [
   ...Object.keys(pkg.dependencies || {}),
   ...Object.keys(pkg.peerDependencies || {}),
 ].map((name) => RegExp(`^${name}($|/)`));
 
-const outputDir = path.resolve(__dirname, '@huangshuisheng');
-console.log(external);
-console.log(outputDir);
-console.log(path.resolve(__dirname, 'packages/utils/index.ts'));
 export default defineConfig([
   {
     input: path.resolve(__dirname, 'packages/utils/index.ts'),
@@ -45,13 +36,11 @@ export default defineConfig([
         plugins: [
           [
             '@babel/plugin-transform-runtime',
-            // { version: babelRuntimeVersion, useESModules: true },
             {
               absoluteRuntime: false, // boolean或者string，默认为false。
               // corejs: 3, // false, 2,3或{ version: 2 | 3, proposals: boolean }, 默认为false
               helpers: true, // boolean, 默认为true.切换内联的 Babel 助手（classCallCheck,extends等）是否替换为对 的调用moduleName
               regenerator: true, // 切换生成器函数是否转换为使用不污染全局范围的再生器运行时。默认为true
-              version: babelRuntimeVersion,
             },
           ],
         ],

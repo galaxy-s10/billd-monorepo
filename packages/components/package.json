@@ -1,12 +1,10 @@
 {
-  "name": "@huangshuisheng/utils",
+  "name": "@huangshuisheng/components",
   "version": "0.0.0",
-  "description": "Billd's utils",
+  "description": "Billd's components",
   "keywords": [
     "billd",
-    "utils",
-    "javascript",
-    "css"
+    "components"
   ],
   "homepage": "http://project.hsslive.cn/billd-monorepo",
   "bugs": {
@@ -15,7 +13,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/galaxy-s10/billd-monorepo",
-    "directory": "packages/utils"
+    "directory": "packages/components"
   },
   "license": "MIT",
   "author": "shuisheng <https://github.com/galaxy-s10>",

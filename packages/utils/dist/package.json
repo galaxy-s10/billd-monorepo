@@ -1,5 +1,6 @@
 {
   "name": "@huangshuisheng/utils",
+  "version": "0.0.0",
   "description": "Billd's utils",
   "keywords": [
     "billd",
@@ -7,19 +8,17 @@
     "javascript",
     "css"
   ],
-  "license": "ISC",
-  "version": "0.0.1",
-  "author": "galaxy-s10 <https://github.com/galaxy-s10>",
+  "homepage": "http://project.hsslive.cn/billd-monorepo",
   "bugs": {
-    "url": "https://github.com/galaxy-s10/billd-use/issues"
+    "url": "https://github.com/galaxy-s10/billd-monorepo/issues"
   },
-  "homepage": "http://project.hsslive.cn/billd-use",
   "repository": {
     "type": "git",
-    "url": "https://github.com/galaxy-s10/billd-use",
+    "url": "https://github.com/galaxy-s10/billd-monorepo",
     "directory": "packages/utils"
   },
+  "license": "MIT",
+  "author": "shuisheng <https://github.com/galaxy-s10>",
   "main": "./index.cjs",
-  "types": "./index.d.ts",
   "module": "./index.mjs"
 }

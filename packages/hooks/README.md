@@ -1,11 +1,11 @@
 # 简介
 
-开箱即用的 js 和 css
+开箱即用的 react hooks
 
 # 安装
 
 ```sh
-npm i @huangshuisheng/utils
+npm i @huangshuisheng/hooks
 ```
 
 # 使用

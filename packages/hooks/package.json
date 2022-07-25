@@ -1,12 +1,11 @@
 {
-  "name": "@huangshuisheng/utils",
+  "name": "@huangshuisheng/hooks",
   "version": "0.0.0",
-  "description": "Billd's utils",
+  "description": "Billd's hooks",
   "keywords": [
     "billd",
-    "utils",
-    "javascript",
-    "css"
+    "hooks",
+    "react"
   ],
   "homepage": "http://project.hsslive.cn/billd-monorepo",
   "bugs": {
@@ -15,7 +14,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/galaxy-s10/billd-monorepo",
-    "directory": "packages/utils"
+    "directory": "packages/hooks"
   },
   "license": "MIT",
   "author": "shuisheng <https://github.com/galaxy-s10>",

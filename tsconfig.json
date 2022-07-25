@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    // "module": "CommonJS", // ESNext,CommonJS
     "module": "ESNext", // ESNext,CommonJS
     "strict": true,
     "noImplicitAny": false,
