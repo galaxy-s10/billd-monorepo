@@ -1,7 +1,5 @@
 // child_process的exec是对child_process.spawn的封装，spawn更为底层
-import { spawn } from 'child_process';
-
-import execa from 'execa';
+import { spawn, execSync } from 'child_process';
 
 /**
  * @description: 执行终端命令相关的代码
@@ -30,9 +28,19 @@ export const commandSpawn = (...args) => {
  * @param {*} cwd
  * @return {*}
  */
-export const commandExec = (str: string, cwd: string) => {
-  return execa(str, {
-    cwd,
-    stdio: [2, 2, 2],
-  });
+// export const commandExec = (str: string, cwd: string) => {
+//   console.log(str, cwd, 21);
+//   return execa(str, {
+//     cwd,
+//     stdio: [2, 2, 2],
+//   });
+// };
+/**
+ * @description: 执行终端命令相关的代码
+ * @param {*} str
+ * @param {*} cwd
+ * @return {*}
+ */
+export const commandExec = (str: string) => {
+  return execSync(str);
 };

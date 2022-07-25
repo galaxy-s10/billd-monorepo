@@ -1,6 +1,6 @@
 /**
- * 获取地址栏参数
- * 注意：请提前对url进行decodeURI或decodeURIComponent解码
+ * @description: 获取地址栏参数（注意：请提前对url进行decodeURI或decodeURIComponent解码）
+ * @return {*}
  */
 export const getUrlParams = () => {
   const url = window.location.href;

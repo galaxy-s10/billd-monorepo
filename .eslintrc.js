@@ -86,9 +86,13 @@ module.exports = {
         'no-unused-vars': 2, // 禁止出现未使用过的变量
         'vars-on-top': 2, // 要求所有的 var 声明出现在它们所在的作用域顶部
         'prefer-const': 2, // 要求使用 const 声明那些声明后不再被修改的变量
+        'prefer-template': 2, // 要求使用模板字符串代替字符串连接
+        'new-cap': 2, // 要求构造函数名称以大写字母开头
+        // 'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
+
         // eslint-plugin-import插件
         'import/no-extraneous-dependencies': 2, // 禁止导入未在package.json中声明的外部模块。
-        'import/prefer-default-export': 2, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
+        'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
         'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀，这样就没办法引其他类型文件
         'import/no-unresolved': 0, // 不能解析带别名的路径的模块，但实际上是不影响代码运行的。找不到解决办法，暂时关掉。
       },
@@ -117,7 +121,7 @@ module.exports = {
         // 根据导入路径按字母顺序对每个组内的顺序进行排序
         alphabetize: {
           order: 'asc' /* 按升序排序。选项：['ignore', 'asc', 'desc'] */,
-          caseInsensitive: true /* 忽略大小写。选项：[true, false] */,
+          caseInsensitive: false /* 忽略大小写。选项：[true, false] */,
         },
       },
     ],
@@ -131,11 +135,13 @@ module.exports = {
     'no-unused-vars': 2, // 禁止出现未使用过的变量
     'vars-on-top': 2, // 要求所有的 var 声明出现在它们所在的作用域顶部
     'prefer-const': 2, // 要求使用 const 声明那些声明后不再被修改的变量
+    'prefer-template': 2, // 要求使用模板字符串代替字符串连接
+    'new-cap': 2, // 要求构造函数名称以大写字母开头
     // 'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
 
     // eslint-plugin-import插件
     'import/no-extraneous-dependencies': 2, // 禁止导入未在package.json中声明的外部模块。
-    'import/prefer-default-export': 2, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
+    'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
     'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀，这样就没办法引其他类型文件
     'import/no-unresolved': 0, // 不能解析带别名的路径的模块，但实际上是不影响代码运行的。找不到解决办法，暂时关掉。
   },
