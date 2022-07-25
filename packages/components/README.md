@@ -5,7 +5,7 @@
 # 安装
 
 ```sh
-npm i @huangshuisheng/components
+npm install @huangshuisheng/components
 ```
 
 # 使用

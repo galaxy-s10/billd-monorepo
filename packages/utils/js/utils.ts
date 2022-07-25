@@ -1,4 +1,8 @@
-/** 删除对象中值为: null, undefined, NaN, ''的属性 */
+/**
+ * @description: 删除对象中值为: null, undefined, NaN, ''的属性
+ * @param {any} obj
+ * @return {*}
+ */
 export const deleteNullObjectKey = (obj: any) => {
   Object.keys(obj).forEach((key) => {
     if ([null, undefined, NaN, ''].includes(obj[key])) {
@@ -15,20 +19,30 @@ export const deleteNullObjectKey = (obj: any) => {
  * @return {*}
  */
 export const replaceKeyFromValue = (str: string, obj: object) => {
+  let res = str;
   Object.keys(obj).forEach((v) => {
-    // eslint-disable-next-line
-    str = str.replace(new RegExp(`{${v}}`, 'ig'), obj[v]);
+    res = res.replace(new RegExp(`{${v}}`, 'ig'), obj[v]);
   });
-  return str;
+  return res;
 };
 
 /**
- * 判断数据类型
- * https://github.com/iview/iview/blob/2.0/src/utils/assist.js
+ * @description: 判断数据类型
+ * @return {*}
  */
-
-export const judgeType = (obj: any): string => {
-  const { toString } = Object.prototype;
+export const judgeType = (
+  obj: any
+):
+  | 'boolean'
+  | 'number'
+  | 'string'
+  | 'function'
+  | 'array'
+  | 'date'
+  | 'regExp'
+  | 'undefined'
+  | 'null'
+  | 'object' => {
   const map = {
     '[object Boolean]': 'boolean',
     '[object Number]': 'number',
@@ -41,13 +55,13 @@ export const judgeType = (obj: any): string => {
     '[object Null]': 'null',
     '[object Object]': 'object',
   };
-  // @ts-ignore
-  return map[toString.call(obj)];
+  return map[Object.prototype.toString.call(obj)];
 };
 
 /**
- * myName转化为my-name
- * https://github.com/vueComponent/ant-design-vue/blob/HEAD/antd-tools/generator-types/src/utils.ts
+ * @description: myName转化为my-name（https://github.com/vueComponent/ant-design-vue/blob/HEAD/antd-tools/generator-types/src/utils.ts）
+ * @param {string} input
+ * @return {*}
  */
 export const toKebabCase = (input: string): string =>
   input.replace(
@@ -56,50 +70,19 @@ export const toKebabCase = (input: string): string =>
   );
 
 /**
- * 获取滚动条宽度
- * https://github.com/iview/iview/blob/2.0/src/utils/assist.js
+ * @description: 使用json进行深克隆
+ * @param {*} obj
+ * @return {*}
  */
-export const getScrollBarSize = () => {
-  const inner = document.createElement('div');
-  inner.style.width = '100%';
-  inner.style.height = '200px';
-
-  const outer = document.createElement('div');
-  const outerStyle = outer.style;
-
-  outerStyle.position = 'absolute';
-  outerStyle.top = '0px';
-  outerStyle.left = '0px';
-  outerStyle.pointerEvents = 'none';
-  outerStyle.visibility = 'hidden';
-  outerStyle.width = '200px';
-  outerStyle.height = '150px';
-  outerStyle.overflow = 'hidden';
-  console.log(outerStyle.top);
-
-  outer.appendChild(inner);
-
-  document.body.appendChild(outer);
-
-  const widthContained = inner.offsetWidth;
-  outer.style.overflow = 'scroll';
-  let widthScroll = inner.offsetWidth;
-
-  if (widthContained === widthScroll) {
-    widthScroll = outer.clientWidth;
-  }
-
-  document.body.removeChild(outer);
-
-  return widthContained - widthScroll;
-};
-
-/** 使用json进行深克隆  */
 export const deepCloneByJson = <T>(obj: T): T =>
   JSON.parse(JSON.stringify(obj));
 
-/** 手写深拷贝，解决循环引用 */
-export const deepClone = <T>(val: T): T => {
+/**
+ * @description: 手写深拷贝，解决循环引用
+ * @param {*} object
+ * @return {*}
+ */
+export const deepClone = <T>(object: T): T => {
   function clone(obj: any, hash: any) {
     const newobj: any = Array.isArray(obj) ? [] : {};
     // eslint-disable-next-line
@@ -118,7 +101,7 @@ export const deepClone = <T>(val: T): T => {
     });
     return newobj;
   }
-  return clone(val, undefined);
+  return clone(object, undefined);
 };
 
 /**
@@ -143,40 +126,6 @@ export const getRandomString = (length: number): string => {
   }
   return res;
 };
-
-/**
- * @description: 将内容复制到剪切板
- * @param {string} text
- * @return {*}
- */
-export const copyToClipBoard = (text: string): void => {
-  const oInput = document.createElement('input');
-  oInput.value = text;
-  document.body.appendChild(oInput);
-  oInput.select(); // 选择对象
-  document.execCommand('Copy'); // 执行浏览器复制命令
-  oInput.parentElement?.removeChild(oInput);
-};
-
-/** 返回设备类型 */
-export const judgeDevice = () => {
-  const ua = navigator.userAgent.toLowerCase();
-  console.log(ua);
-  const isAndroid = ua.indexOf('android') !== -1; // Android
-  const isiOS = ua.indexOf('iphone os') !== -1; // iOS
-  const isIpad = ua.indexOf('ipad') !== -1; // ipad
-  return {
-    isAndroid,
-    isiOS,
-    isIpad,
-  };
-};
-
-/** 判断是否是浏览器环境 */
-export const isBrowser = (): boolean =>
-  typeof window !== 'undefined' &&
-  typeof window.document !== 'undefined' &&
-  typeof window.document.createElement !== 'undefined';
 
 /**
  * @description: 防抖函数（Promise）

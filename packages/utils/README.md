@@ -5,7 +5,7 @@
 # 安装
 
 ```sh
-npm i @huangshuisheng/utils
+npm install @huangshuisheng/utils
 ```
 
 # 使用

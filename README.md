@@ -1,6 +1,6 @@
 # 简介
 
-开箱即用的常用的 js 和 css
+billd's monorepo，目前提供了：utils、hooks、components 三个库
 
 # 安装
 
@@ -16,8 +16,30 @@
 
 ```
 
-# 构建
+# 更新 ci 版本号
+
+> [https://docs.npmjs.com/cli/v8/commands/npm-version](https://docs.npmjs.com/cli/v8/commands/npm-version)
 
 ```sh
-yarn build
+npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
+
+alias: verison
+```
+
+# 更新 packages 里所有的包
+
+```sh
+pnpm run update
+```
+
+# 构建 packages 里所有的包
+
+```sh
+pnpm run build
+```
+
+# 发布 packages 里所有的包
+
+```sh
+pnpm run publish
 ```

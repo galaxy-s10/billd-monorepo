@@ -5,7 +5,7 @@
 # 安装
 
 ```sh
-npm i @huangshuisheng/hooks
+npm install @huangshuisheng/hooks
 ```
 
 # 使用

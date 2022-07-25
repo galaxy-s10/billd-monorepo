@@ -83,4 +83,4 @@ class CacheModel {
   };
 }
 
-export default new CacheModel();
+export default CacheModel;

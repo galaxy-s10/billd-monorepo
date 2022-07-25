@@ -15,12 +15,55 @@ export const getStyle = (ele: Element, styleName: string) => {
   }
 };
 
-export const getStyle2 = (ele: Element, styleName: string) => {
-  if (window.getComputedStyle) {
-    return window.getComputedStyle(ele, null)[styleName];
-  } else {
-    // 兼容ie
-    // @ts-ignore
-    return ele.currentStyle[styleName];
+/**
+ * @description: 将内容复制到剪切板
+ * @param {string} text
+ * @return {*}
+ */
+export const copyToClipBoard = (text: string): void => {
+  const oInput = document.createElement('input');
+  oInput.value = text;
+  document.body.appendChild(oInput);
+  oInput.select(); // 选择对象
+  document.execCommand('Copy'); // 执行浏览器复制命令
+  oInput.parentElement?.removeChild(oInput);
+};
+
+/**
+ * @description: 获取滚动条宽度（https://github.com/iview/iview/blob/2.0/src/utils/assist.js#L19）
+ * @return {*}
+ */
+export const getScrollBarSize = () => {
+  const inner = document.createElement('div');
+  inner.style.width = '100%';
+  inner.style.height = '200px';
+
+  const outer = document.createElement('div');
+  const outerStyle = outer.style;
+
+  outerStyle.position = 'absolute';
+  outerStyle.top = '0px';
+  outerStyle.left = '0px';
+  outerStyle.pointerEvents = 'none';
+  outerStyle.visibility = 'hidden';
+  outerStyle.width = '200px';
+  outerStyle.height = '150px';
+  outerStyle.overflow = 'hidden';
+  console.log(outerStyle.top);
+
+  outer.appendChild(inner);
+
+  document.body.appendChild(outer);
+
+  const widthContained = inner.offsetWidth;
+  outer.style.overflow = 'scroll';
+  let widthScroll = inner.offsetWidth;
+
+  if (widthContained === widthScroll) {
+    widthScroll = outer.clientWidth;
   }
+
+  document.body.removeChild(outer);
+
+  return widthContained - widthScroll;
 };
