@@ -1,14 +1,16 @@
 {
   "name": "billd-monorepo",
-  "version": "0.0.1",
-  "description": "billd's utils",
+  "version": "0.0.0",
+  "description": "billd's monorepo currently provides three libraries: utils, hooks, components",
   "keywords": [
     "billd",
     "utils",
     "javascript",
-    "css"
+    "css",
+    "hooks",
+    "components"
   ],
-  "homepage": "http://project.hsslive.cn/billd-monorepo/",
+  "homepage": "https://github.com/galaxy-s10/billd-monorepo",
   "bugs": {
     "url": "https://github.com/galaxy-s10/billd-monorepo/issues"
   },

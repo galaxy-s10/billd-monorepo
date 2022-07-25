@@ -20,7 +20,7 @@ const updatePackageJSON = async () => {
     packageJSON.bugs = {
       url: 'https://github.com/galaxy-s10/billd-monorepo/issues',
     };
-    packageJSON.homepage = 'http://project.hsslive.cn/billd-monorepo';
+    packageJSON.homepage = 'https://github.com/galaxy-s10/billd-monorepo';
     packageJSON.repository = {
       type: 'git',
       url: 'https://github.com/galaxy-s10/billd-monorepo',
