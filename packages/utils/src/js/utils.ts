@@ -3,7 +3,7 @@
  * @param {any} obj
  * @return {*}
  */
-export const deleteNullObjectKey = (obj: any) => {
+export const deleteUseLessObjectKey = (obj: any) => {
   Object.keys(obj).forEach((key) => {
     if ([null, undefined, NaN, ''].includes(obj[key])) {
       delete obj[key];

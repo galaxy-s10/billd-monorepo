@@ -7,10 +7,10 @@ execSync('npm run build', { stdio: 'inherit' });
 
 const command = 'npm publish';
 
-for (const { name } of packages) {
+Object.keys(packages).forEach((name) => {
   execSync(command, {
     stdio: 'inherit',
     cwd: path.join('packages', name, 'dist'),
   });
   console.log(`Published @huangshuisheng/${name}`);
-}
+});

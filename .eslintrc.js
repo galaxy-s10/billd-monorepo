@@ -55,7 +55,13 @@ module.exports = {
       //     'eslint:recommended',
       //   ],
       plugins: ['import', '@typescript-eslint'],
+      // rules优先级最高，会覆盖上面的
       rules: {
+        /**
+         * 0 => off
+         * 1 => warn
+         * 2 => error
+         */
         'import/order': [
           'error',
           {
@@ -88,6 +94,29 @@ module.exports = {
         'prefer-const': 2, // 要求使用 const 声明那些声明后不再被修改的变量
         'prefer-template': 2, // 要求使用模板字符串代替字符串连接
         'new-cap': 2, // 要求构造函数名称以大写字母开头
+        'no-restricted-syntax': [
+          // 禁用一些语法
+          'error',
+          // 'ForInStatement',
+          // 'ForOfStatement',
+          {
+            selector: 'ForInStatement',
+            /**
+             * 用 map() / every() / filter() / find() / findIndex() / reduce() / some() / ... 遍历数组，
+             * 和使用 Object.keys() / Object.values() / Object.entries() 迭代你的对象生成数组。
+             * 拥有返回值得纯函数比这个更容易解释
+             */
+            message:
+              'for in会迭代遍历原型链(__proto__)，建议使用map/every/filter等遍历数组，使用Object.{keys,values,entries}等遍历对象',
+          },
+          {
+            selector: 'ForOfStatement',
+            message:
+              '建议使用map/every/filter等遍历数组，使用Object.{keys,values,entries}等遍历对象',
+          },
+        ], // https://github.com/BingKui/javascript-zh#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E5%8F%91%E7%94%9F%E5%99%A8
+        'no-iterator': 2, // 禁止使用__iterator__迭代器
+
         // 'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
 
         // eslint-plugin-import插件
@@ -137,6 +166,29 @@ module.exports = {
     'prefer-const': 2, // 要求使用 const 声明那些声明后不再被修改的变量
     'prefer-template': 2, // 要求使用模板字符串代替字符串连接
     'new-cap': 2, // 要求构造函数名称以大写字母开头
+    'no-restricted-syntax': [
+      // 禁用一些语法
+      'error',
+      // 'ForInStatement',
+      // 'ForOfStatement',
+      {
+        selector: 'ForInStatement',
+        /**
+         * 用 map() / every() / filter() / find() / findIndex() / reduce() / some() / ... 遍历数组，
+         * 和使用 Object.keys() / Object.values() / Object.entries() 迭代你的对象生成数组。
+         * 拥有返回值得纯函数比这个更容易解释
+         */
+        message:
+          'for in会迭代遍历原型链(__proto__)，建议使用map/every/filter等遍历数组，使用Object.{keys,values,entries}等遍历对象',
+      },
+      {
+        selector: 'ForOfStatement',
+        message:
+          '建议使用map/every/filter等遍历数组，使用Object.{keys,values,entries}等遍历对象',
+      },
+    ], // https://github.com/BingKui/javascript-zh#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E5%8F%91%E7%94%9F%E5%99%A8
+    'no-iterator': 2, // 禁止使用__iterator__迭代器
+
     // 'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
 
     // eslint-plugin-import插件

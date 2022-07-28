@@ -31,19 +31,19 @@ const FILES_COPY_LOCAL = ['README.md', 'package.json'];
 // 将packages里面的包的package.json和README.md复制到构建目录
 const copyFile = async () => {
   try {
-    for (const { name } of packages) {
+    Object.values(packages).forEach(({ name }) => {
       const packageRoot = path.resolve(__dirname, '..', 'packages', name);
       const packageDist = path.resolve(packageRoot, 'dist');
-      for (const file of FILES_COPY_LOCAL) {
+      Object.values(FILES_COPY_LOCAL).forEach((file) => {
         copyFileSync(
           path.join(packageRoot, file),
           path.join(packageDist, file)
         );
-      }
-      for (const file of FILES_COPY_ROOT) {
+      });
+      Object.values(FILES_COPY_ROOT).forEach((file) => {
         copyFileSync(path.join(rootDir, file), path.join(packageDist, file));
-      }
-    }
+      });
+    });
   } catch (error) {
     console.log(error);
   }

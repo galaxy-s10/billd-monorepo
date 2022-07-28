@@ -1,4 +1,4 @@
-class CacheModel {
+export class CacheModel {
   /**
    * @description: 获取缓存
    * @param {string} key
@@ -82,5 +82,3 @@ class CacheModel {
     }
   };
 }
-
-export default CacheModel;

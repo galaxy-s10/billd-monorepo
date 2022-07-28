@@ -9,7 +9,8 @@ export const DIR_PACKAGES = path.resolve(__dirname, '../packages');
 
 const updatePackageJSON = async () => {
   const { version } = readJSONSync('package.json'); // 项目根目录的package.json
-  for (const { name, description, author } of packages) {
+
+  Object.values(packages).forEach(({ name, description, author }) => {
     const packageDir = path.join(DIR_PACKAGES, name);
     const packageJSONPATH = path.join(packageDir, 'package.json'); // 项目根目录的packages/*里面的package.json
     const packageJSON = readJSONSync(packageJSONPATH);
@@ -29,8 +30,7 @@ const updatePackageJSON = async () => {
     packageJSON.main = './index.cjs';
     packageJSON.module = './index.mjs';
     writeJSON(packageJSONPATH, packageJSON, { spaces: 2 });
-  }
-  console.log(version);
+  });
 };
 
 (async () => {

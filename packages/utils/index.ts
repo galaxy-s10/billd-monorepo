@@ -1,5 +1,8 @@
-export * from './js/dom';
-export * from './js/reg';
-export * from './js/url';
-export * from './js/cache';
-export * from './js/utils';
+export * from './src/js/dom';
+export * from './src/js/bom';
+export * from './src/js/reg';
+export * from './src/js/url';
+export * from './src/js/cache';
+export * from './src/js/utils';
+
+console.log('hi');

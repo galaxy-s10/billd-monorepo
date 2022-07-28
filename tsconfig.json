@@ -3,7 +3,7 @@
     "target": "ESNext",
     "module": "ESNext", // ESNext,CommonJS
     "strict": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "lib": ["DOM", "ESNext"],
     "jsx": "preserve",
     "moduleResolution": "Node",
@@ -25,5 +25,9 @@
       "module": "CommonJS"
     }
   },
-  "include": ["packages/**/*.ts"] // 仅仅匹配这些文件，除了src以外的文件都不会被匹配
+  "include": [
+    "packages/**/*.ts",
+    "scripts/rollup.config.ts",
+    "rollup.config.ts"
+  ] // 仅仅匹配这些文件
 }
