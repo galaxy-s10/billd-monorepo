@@ -13,5 +13,5 @@ npm install @huangshuisheng/utils
 > 该库尚未发布 1.0 版本，api 可能会随时发生变化，请勿用于生产环境！
 
 ```ts
-
+import { isBrowser } from '@huangshuisheng/utils';
 ```

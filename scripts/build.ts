@@ -47,7 +47,6 @@ const copyFile = async () => {
   } catch (error) {
     console.log(error);
   }
-  // 复制package.json
 };
 
 (async () => {

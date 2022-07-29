@@ -6,6 +6,7 @@ export const packages = [
     author: 'shuisheng <https://github.com/galaxy-s10>',
     esm: true,
     cjs: true,
+    umd: true,
   },
   {
     name: 'components',
@@ -13,5 +14,14 @@ export const packages = [
     author: 'shuisheng <https://github.com/galaxy-s10>',
     esm: true,
     cjs: true,
+    umd: true,
+  },
+  {
+    name: 'hooks',
+    description: "Billd's hooks",
+    author: 'shuisheng <https://github.com/galaxy-s10>',
+    esm: true,
+    cjs: true,
+    umd: true,
   },
 ];

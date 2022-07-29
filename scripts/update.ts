@@ -7,6 +7,11 @@ import { packages } from '../meta/packages';
 export const DIR_ROOT = path.resolve(__dirname, '..');
 export const DIR_PACKAGES = path.resolve(__dirname, '../packages');
 
+/**
+ * 1.将项目根目录的package.json的version更新到packages/*里的package.json的version
+ * 2.更新packages/*里的package.json，优先使用packages/*里的package.json，缺省的话
+ * 使用项目根目录的package.json的字段
+ */
 const updatePackageJSON = async () => {
   const { version } = readJSONSync('package.json'); // 项目根目录的package.json
 

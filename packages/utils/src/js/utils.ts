@@ -70,6 +70,16 @@ export const toKebabCase = (input: string): string =>
   );
 
 /**
+ * @description: my-name转化为myName
+ * @param {string} input
+ * @return {*}
+ */
+export const toCamel = (input: string): string =>
+  input.replace(/\-(\w)/g, function (all, letter) {
+    return letter.toUpperCase();
+  });
+
+/**
  * @description: 使用json进行深克隆
  * @param {*} obj
  * @return {*}
