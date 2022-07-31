@@ -16,7 +16,9 @@ npm install @huangshuisheng/components
 import { ScratchCanvas } from '@huangshuisheng/components';
 ```
 
-# 浏览器使用
+# 在浏览器使用
+
+> 该库尚未发布 1.0 版本，api 可能会随时发生变化，请勿用于生产环境！
 
 ```html
 <!DOCTYPE html>
@@ -35,7 +37,7 @@ import { ScratchCanvas } from '@huangshuisheng/components';
   </head>
   <body>
     <div id="scratch-canvas"></div>
-    <script src="https://cdn.jsdelivr.net/npm/@huangshuisheng/components/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@huangshuisheng/components/index.min.js"></script>
     <script>
       new BilldComponents.ScratchCanvas(
         document.getElementById('scratch-canvas'),

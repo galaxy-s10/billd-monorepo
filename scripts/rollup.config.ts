@@ -91,7 +91,6 @@ Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
         format: 'umd',
         name: toCamel(`Billd-${name}`),
       },
-      external,
       plugins: [
         ...umdMinConfigPlugins,
         terser({
