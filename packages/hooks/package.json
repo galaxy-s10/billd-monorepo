@@ -20,6 +20,7 @@
   "author": "shuisheng <https://github.com/galaxy-s10>",
   "main": "./index.cjs",
   "module": "./index.mjs",
+  "types": "./index.d.ts",
   "dependencies": {},
   "devDependencies": {},
   "peerDependencies": {}

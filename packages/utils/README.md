@@ -36,7 +36,7 @@ console.log(isBrowser());
     <title>Document</title>
   </head>
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/@huangshuisheng/utils/index.min.js"></script>
+    <script src="https://unpkg.com/@huangshuisheng/utils/index.min.js"></script>
     <script>
       console.log(BilldUtils.isBrowser());
     </script>

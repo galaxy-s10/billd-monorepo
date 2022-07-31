@@ -30,6 +30,7 @@ importers:
       prettier: ^2.7.1
       rimraf: ^3.0.2
       rollup: ^2.77.0
+      rollup-plugin-dts: ^4.2.2
       rollup-plugin-terser: ^7.0.2
       rollup-plugin-typescript2: ^0.32.1
       standard-version: ^9.5.0
@@ -46,6 +47,7 @@ importers:
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.77.0
       '@rollup/plugin-typescript': 8.3.4_55kiftncucr43pz4hskma6yi2q
       rollup: 2.77.0
+      rollup-plugin-dts: 4.2.2_55kiftncucr43pz4hskma6yi2q
       rollup-plugin-terser: 7.0.2_rollup@2.77.0
       rollup-plugin-typescript2: 0.32.1_55kiftncucr43pz4hskma6yi2q
     devDependencies:
@@ -3858,6 +3860,13 @@ packages:
       sourcemap-codec: 1.4.8
     dev: false
 
+  /magic-string/0.26.2:
+    resolution: {integrity: sha512-NzzlXpclt5zAbmo6h6jNc8zl2gNRGHvmsZW4IvZhTC4W7k4OlLP+S5YLussa/r3ixNT66KOQfNORlXHSOy/X4A==}
+    engines: {node: '>=12'}
+    dependencies:
+      sourcemap-codec: 1.4.8
+    dev: false
+
   /make-dir/3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
     engines: {node: '>=8'}
@@ -4500,6 +4509,20 @@ packages:
     dependencies:
       glob: 7.2.3
     dev: true
+
+  /rollup-plugin-dts/4.2.2_55kiftncucr43pz4hskma6yi2q:
+    resolution: {integrity: sha512-A3g6Rogyko/PXeKoUlkjxkP++8UDVpgA7C+Tdl77Xj4fgEaIjPSnxRmR53EzvoYy97VMVwLAOcWJudaVAuxneQ==}
+    engines: {node: '>=v12.22.11'}
+    peerDependencies:
+      rollup: ^2.55
+      typescript: ^4.1
+    dependencies:
+      magic-string: 0.26.2
+      rollup: 2.77.0
+      typescript: 4.7.4
+    optionalDependencies:
+      '@babel/code-frame': 7.18.6
+    dev: false
 
   /rollup-plugin-terser/7.0.2_rollup@2.77.0:
     resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}

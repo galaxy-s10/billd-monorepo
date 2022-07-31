@@ -19,6 +19,7 @@
   "author": "shuisheng <https://github.com/galaxy-s10>",
   "main": "./index.cjs",
   "module": "./index.mjs",
+  "types": "./index.d.ts",
   "dependencies": {
     "@babel/runtime-corejs3": "^7.18.9"
   },

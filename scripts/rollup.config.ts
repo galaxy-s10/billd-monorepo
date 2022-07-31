@@ -7,6 +7,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'rollup';
 import { RollupOptions } from 'rollup';
 import { OutputOptions } from 'rollup';
+import dtsPlugin from 'rollup-plugin-dts';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 
@@ -20,9 +21,10 @@ const external = [...Object.keys(pkg.dependencies || {})].map((name) =>
 
 const configs: RollupOptions[] = [];
 
-const umdMinConfig: RollupOptions[] = [];
+const umdConfig: RollupOptions[] = [];
+const dtsConfig: RollupOptions[] = [];
 
-Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
+Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
   const input = path.resolve(__dirname, `packages/${name}/index.ts`);
   const output: OutputOptions[] = [];
   const plugins = [
@@ -33,6 +35,7 @@ Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
      */
     commonjs(),
     nodeResolve(), // 配合@rollup/plugin-commonjs解析第三方模块
+    // dts(),
     typescript({
       abortOnError: false,
     }),
@@ -53,7 +56,7 @@ Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
   }
 
   if (umd !== false) {
-    const umdMinConfigPlugins = [
+    const umdConfigPlugins = [
       ...plugins,
       babel({
         exclude: 'node_modules/**', // 只编译我们的源代码
@@ -75,16 +78,16 @@ Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
         babelHelpers: 'bundled', // "bundled" | "runtime" | "inline" | "external" | undefined
       }),
     ];
-    umdMinConfig.push({
+    umdConfig.push({
       input,
       output: {
         file: path.resolve(__dirname, `packages/${name}/dist/index.js`),
         format: 'umd',
         name: toCamel(`Billd-${name}`),
       },
-      plugins: [...umdMinConfigPlugins],
+      plugins: [...umdConfigPlugins],
     });
-    umdMinConfig.push({
+    umdConfig.push({
       input,
       output: {
         file: path.resolve(__dirname, `packages/${name}/dist/index.min.js`),
@@ -92,7 +95,7 @@ Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
         name: toCamel(`Billd-${name}`),
       },
       plugins: [
-        ...umdMinConfigPlugins,
+        ...umdConfigPlugins,
         terser({
           compress: {
             pure_getters: true,
@@ -101,6 +104,17 @@ Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
           },
         }),
       ],
+    });
+  }
+
+  if (dts !== false) {
+    dtsConfig.push({
+      input,
+      output: {
+        file: path.resolve(__dirname, `packages/${name}/dist/index.d.ts`),
+        name: toCamel(`Billd-${name}`),
+      },
+      plugins: [dtsPlugin()],
     });
   }
 
@@ -128,7 +142,7 @@ Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
   });
 });
 
-export default defineConfig([...configs, ...umdMinConfig]);
+export default defineConfig([...configs, ...umdConfig, ...dtsConfig]);
 // export default defineConfig([
 //   {
 //     input: path.resolve(__dirname, `packages/utils/index.ts`),

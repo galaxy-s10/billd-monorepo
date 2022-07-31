@@ -7,6 +7,7 @@ export const packages = [
     esm: true,
     cjs: true,
     umd: true,
+    dts: true,
   },
   {
     name: 'components',
@@ -15,6 +16,7 @@ export const packages = [
     esm: true,
     cjs: true,
     umd: true,
+    dts: true,
   },
   {
     name: 'hooks',
@@ -23,5 +25,6 @@ export const packages = [
     esm: true,
     cjs: true,
     umd: true,
+    dts: true,
   },
 ];

@@ -11,6 +11,8 @@
     "forceConsistentCasingInFileNames": true, //在文件名中强制使用一致的大小写
     "skipLibCheck": true, // 跳过d.ts声明文件的类型检查。
     "baseUrl": "./",
+    // "declaration": true, // 生成.d.ts文件
+    // "declarationDir": "./types", //生成.d.ts文件的目录
     "resolveJsonModule": true // 解析json模块
     // "paths": {
     //   "@/*": ["src/*"]
@@ -25,6 +27,7 @@
       "module": "CommonJS"
     }
   },
+  // "exclude": ["**/*.d.ts"],
   "include": [
     "packages/**/*.ts",
     "scripts/rollup.config.ts",
