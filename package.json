@@ -1,6 +1,6 @@
 {
   "name": "billd-monorepo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "billd's monorepo currently provides three libraries: utils, hooks, components",
   "keywords": [
     "billd",
