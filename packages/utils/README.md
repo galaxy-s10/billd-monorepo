@@ -1,6 +1,6 @@
 # 简介
 
-开箱即用的 js 和 css
+开箱即用的 js 和 css，纯 JavaScript 实现，无依赖！
 
 # 安装
 

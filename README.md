@@ -1,6 +1,6 @@
 # 简介
 
-billd's monorepo，目前提供了：utils、hooks、components 三个库
+[billd's monorepo](https://github.com/galaxy-s10/billd-monorepo)，目前提供了：utils、hooks、components 三个库
 
 # 文档
 

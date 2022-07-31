@@ -1,6 +1,6 @@
 {
   "name": "@huangshuisheng/utils",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Billd's utils",
   "keywords": [
     "billd",
@@ -8,7 +8,7 @@
     "javascript",
     "css"
   ],
-  "homepage": "https://github.com/galaxy-s10/billd-monorepo",
+  "homepage": "http://project.hsslive.cn/billd-monorepo/",
   "bugs": {
     "url": "https://github.com/galaxy-s10/billd-monorepo/issues"
   },

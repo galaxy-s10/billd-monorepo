@@ -1,13 +1,13 @@
 {
   "name": "@huangshuisheng/hooks",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Billd's hooks",
   "keywords": [
     "billd",
     "hooks",
     "react"
   ],
-  "homepage": "https://github.com/galaxy-s10/billd-monorepo",
+  "homepage": "http://project.hsslive.cn/billd-monorepo/",
   "bugs": {
     "url": "https://github.com/galaxy-s10/billd-monorepo/issues"
   },
