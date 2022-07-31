@@ -1,1 +1,1 @@
-export * from './src/scratch';
+export * from './src/ScratchCanvas';

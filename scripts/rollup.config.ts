@@ -3,7 +3,7 @@ import path from 'path';
 import { DEFAULT_EXTENSIONS } from '@babel/core';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'rollup';
 import { RollupOptions } from 'rollup';
 import { OutputOptions } from 'rollup';
@@ -26,23 +26,15 @@ Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
   const input = path.resolve(__dirname, `packages/${name}/index.ts`);
   const output: OutputOptions[] = [];
   const plugins = [
-    // commonjs(), // 安装完@babel/runtime-corejs3后，build会报错，得安装这个打包commonjs
+    /**
+     * @babel/plugin-transform-runtime使用corejs:3（即@babel/runtime-corejs3），
+     * 而@babel/runtime-corejs3源码是使用commonjs规范写的，因此需要添加@rollup/plugin-commonjs插件
+     * 让rollup支持commonjs 规范，识别 commonjs 规范的依赖。
+     */
+    commonjs(),
+    nodeResolve(), // 配合@rollup/plugin-commonjs解析第三方模块
     typescript({
       abortOnError: false,
-    }),
-    babel({
-      exclude: 'node_modules/**', // 只编译我们的源代码
-      extensions: ['.ts'],
-      /**
-       * 这里设置plugins会覆盖babel.config.js的plugins，
-       * 因此不设置这里的plugins，让它读取babel.config.js的plugins
-       */
-      // plugins: [],
-      /**
-       * babelHelpers和@babel/plugin-transform-runtime的helpers属性相关，
-       * 如果babelHelpers设置成runtime，@babel/plugin-transform-runtime的helpers得设置true！
-       */
-      babelHelpers: 'runtime', // "bundled" | "runtime" | "inline" | "external" | undefined
     }),
   ];
 
@@ -61,10 +53,36 @@ Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
   }
 
   if (umd !== false) {
-    output.push({
-      file: path.resolve(__dirname, `packages/${name}/dist/index.js`),
-      format: 'umd',
-      name: toCamel(`Billd-${name}`),
+    const umdMinConfigPlugins = [
+      ...plugins,
+      babel({
+        exclude: 'node_modules/**', // 只编译我们的源代码
+        extensions: ['.ts'],
+        /**
+         * 这里设置plugins会覆盖babel.config.js的plugins，
+         * 因此不设置这里的plugins，让它读取babel.config.js的plugins
+         */
+        plugins: [
+          [
+            '@babel/plugin-transform-runtime',
+            {
+              corejs: 3,
+              helpers: false,
+              regenerator: true,
+            },
+          ],
+        ],
+        babelHelpers: 'bundled', // "bundled" | "runtime" | "inline" | "external" | undefined
+      }),
+    ];
+    umdMinConfig.push({
+      input,
+      output: {
+        file: path.resolve(__dirname, `packages/${name}/dist/index.js`),
+        format: 'umd',
+        name: toCamel(`Billd-${name}`),
+      },
+      plugins: [...umdMinConfigPlugins],
     });
     umdMinConfig.push({
       input,
@@ -75,7 +93,7 @@ Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
       },
       external,
       plugins: [
-        ...plugins,
+        ...umdMinConfigPlugins,
         terser({
           compress: {
             pure_getters: true,
@@ -91,7 +109,23 @@ Object.values(packages).forEach(({ name, esm, cjs, umd }) => {
     input,
     output,
     external,
-    plugins,
+    plugins: [
+      ...plugins,
+      babel({
+        exclude: 'node_modules/**', // 只编译我们的源代码
+        extensions: ['.ts'],
+        /**
+         * 这里设置plugins会覆盖babel.config.js的plugins，
+         * 因此不设置这里的plugins，让它读取babel.config.js的plugins
+         */
+        // plugins: [],
+        /**
+         * babelHelpers和@babel/plugin-transform-runtime的helpers属性相关，
+         * 如果babelHelpers设置成runtime，@babel/plugin-transform-runtime的helpers得设置true！
+         */
+        babelHelpers: 'runtime', // "bundled" | "runtime" | "inline" | "external" | undefined
+      }),
+    ],
   });
 });
 

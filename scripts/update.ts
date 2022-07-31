@@ -39,5 +39,5 @@ const updatePackageJSON = async () => {
 };
 
 (async () => {
-  updatePackageJSON();
+  await updatePackageJSON();
 })();

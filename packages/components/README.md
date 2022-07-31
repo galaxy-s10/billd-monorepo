@@ -10,8 +10,4 @@ npm install @huangshuisheng/components
 
 # 使用
 
-> 该库尚未发布 1.0 版本，api 可能会随时发生变化，请勿用于生产环境！
-
-```ts
-import { ScratchCanvas } from '@huangshuisheng/components';
-```
+> ScratchCanvas 组件： packages/components/src/ScratchCanvas/README.md

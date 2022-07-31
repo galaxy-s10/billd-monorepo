@@ -11,7 +11,7 @@ const clean = async () => {
 };
 
 // rollup打包
-const rollupBundle = async () => {
+const rollupBuild = async () => {
   try {
     execSync('pnpm run build:rollup');
   } catch (error) {
@@ -51,6 +51,6 @@ const copyFile = async () => {
 
 (async () => {
   await clean();
-  await rollupBundle();
+  await rollupBuild();
   await copyFile();
 })();

@@ -1,4 +1,8 @@
 {
-  "entryPoints": ["./src/main.ts"],
-  "out": "./docs"
+  "entryPoints": [
+    "./packages/utils/index.ts",
+    "./packages/components/index.ts",
+    "./packages/hooks/index.ts"
+  ],
+  "out": "./doc"
 }

@@ -22,11 +22,11 @@
   "author": "shuisheng <https://github.com/galaxy-s10>",
   "scripts": {
     "build": "ts-node ./scripts/build.ts",
-    "build:rollu2p": "rollup -c rollup.config.ts --configPlugin typescript",
     "build:rollup": "rollup -c rollup.config.ts --configPlugin typescript",
     "clean": "rimraf packages/*/dist",
     "cz": "cz",
-    "doc": "typedoc --options ./typedoc.config.json",
+    "dev": "rollup -c rollup.config.ts --configPlugin typescript -w",
+    "doc": "rimraf doc && typedoc --options ./typedoc.config.json",
     "lint": "eslint --config ./.eslintrc.js . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint --config ./.eslintrc.js . --ext .js,.jsx,.ts,.tsx --fix",
     "prepare": "husky install",

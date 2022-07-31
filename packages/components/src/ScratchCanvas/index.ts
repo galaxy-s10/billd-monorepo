@@ -1,14 +1,21 @@
 export class ScratchCanvas {
   constructor(
+    /** dom */
     mycanvas: HTMLElement,
     config: {
       id?: string;
-      pointSize?: number; // 触点大小
-      percent?: number; // 比例
-      coverColor?: string; // 遮罩层颜色
-      resultImg?: string; // 结果图片
-      onFinsh?: Function; // 完成回调
-      resultImgClick?: Function; // 结果图片点击
+      /** 触点大小 */
+      pointSize?: number;
+      /** 比例 */
+      percent?: number;
+      /** 遮罩层颜色 */
+      coverColor?: string;
+      /** 结果图片 */
+      resultImg?: string;
+      /** 完成回调 */
+      onFinsh?: Function;
+      /** 结果图片点击 */
+      resultImgClick?: Function;
     }
   ) {
     function getStyle(obj, name) {
@@ -45,7 +52,8 @@ export class ScratchCanvas {
       img.src = config.resultImg;
       img.setAttribute(
         'style',
-        'position:absolute;top:0;left:0;z-index:-1;width:99%;height:99%'
+        `position:absolute;top:0;left:0;z-index:-1;width:${w}px;height:${h}px`
+        // 'position:absolute;top:0;left:0;z-index:-1;width:${w}px;height:${h}px'
       );
       mycanvas.appendChild(img);
     }

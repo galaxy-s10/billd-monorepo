@@ -15,8 +15,8 @@ export const deleteUseLessObjectKey = (obj: any) => {
  * @description: 替换占位符
  * @param {string} str
  * @param {object} obj
- * @example replaceKeyFromValue(`Hello {name}`,{name:'Word'})=>Hello Word
- * @return {*}
+ * @return {*} string
+ * @example replaceKeyFromValue('Hello {name}',{name:'Word'}) => Hello Word
  */
 export const replaceKeyFromValue = (str: string, obj: object) => {
   let res = str;

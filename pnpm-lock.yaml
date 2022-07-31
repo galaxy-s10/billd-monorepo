@@ -72,13 +72,19 @@ importers:
       typescript: 4.7.4
 
   packages/components:
-    specifiers: {}
+    specifiers:
+      '@babel/runtime-corejs3': ^7.18.9
+    dependencies:
+      '@babel/runtime-corejs3': 7.18.9
 
   packages/hooks:
     specifiers: {}
 
   packages/utils:
-    specifiers: {}
+    specifiers:
+      '@babel/runtime-corejs3': ^7.18.9
+    dependencies:
+      '@babel/runtime-corejs3': 7.18.9
 
 packages:
 
