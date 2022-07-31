@@ -4,21 +4,19 @@ billd's monorepo，目前提供了：utils、hooks、components 三个库
 
 # 安装
 
-> 以@huangshuisheng/utils 这个包为例：
-
 ```sh
-import { isBrowser } from '@huangshuisheng/utils';
+npm install '@huangshuisheng/utils';
+npm install '@huangshuisheng/hooks';
+npm install '@huangshuisheng/components';
 ```
 
 # 使用
 
-> 尚未发布 1.0 版本，api 可能会随时发生变化，请勿用于生产环境！
+> 尚未发布 1.0 版本，api 可能会随时发生变化，请勿用于生产环境！具体用法请查看：
 
-```ts
-import { isBrowser } from '@huangshuisheng/utils';
-
-console.log(isBrowser());
-```
+1. [@huangshuisheng/utils](https://github.com/galaxy-s10/billd-monorepo/blob/master/packages/utils/README.md)
+2. [@huangshuisheng/components](https://github.com/galaxy-s10/billd-monorepo/blob/master/packages/components/README.md)
+3. [@huangshuisheng/hooks](https://github.com/galaxy-s10/billd-monorepo/blob/master/packages/hooks/README.md)
 
 # 更新 ci 版本号
 
@@ -28,6 +26,12 @@ console.log(isBrowser());
 npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
 
 alias: verison
+```
+
+或者：
+
+```sh
+pnpm run release
 ```
 
 # 调试 packages 里所有的包
