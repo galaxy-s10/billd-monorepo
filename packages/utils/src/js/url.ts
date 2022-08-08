@@ -5,7 +5,7 @@
 export const getUrlParams = () => {
   const url = window.location.href;
   const str = url.split('?')[1];
-  const obj = {};
+  const obj: any = {};
   if (str) {
     const keys = str.split('&');
     keys.forEach((item) => {

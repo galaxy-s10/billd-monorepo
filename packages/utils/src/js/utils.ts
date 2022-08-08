@@ -115,13 +115,21 @@ export const deepClone = <T>(object: T): T => {
 };
 
 /**
- * @description:  * 获取[min,max]之间的随机整数。如：[10,30],[-21,32],[-100,-20]
+ * @description: 获取[min,max]之间的随机整数。如：[10,30],[-21,32],[-100,-20]
  * @param {number} min
  * @param {number} max
  * @return {*}
  */
 export const getRandomInt = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
+
+/**
+ * @description: 随机数组的一个元素
+ * @param {any} arr
+ * @return {*}
+ */
+export const getRandomOne = (arr: any[]) =>
+  arr[Math.floor(Math.random() * arr.length)];
 
 /**
  * @description: 获取随机字符串

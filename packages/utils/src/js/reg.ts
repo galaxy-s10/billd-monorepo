@@ -17,7 +17,7 @@ export const regVerify = (str: string, type: 'phone' | 'email') => {
     }
   } catch (error: any) {
     console.error(error);
-    return new Error(error.message);
+    return false;
   }
 };
 
@@ -26,7 +26,7 @@ export const regVerify = (str: string, type: 'phone' | 'email') => {
  * @param {string} value
  * @return {*}
  */
-export const judgeStringSpace = (value: string): boolean => {
+export const judgeStringSpace = (value: string) => {
   const reg1 = /^\s+/g; // 匹配开头空格
   const reg2 = /\s+$/g; // 匹配结尾空格
   if (reg1.test(value) || reg2.test(value)) {

@@ -116,7 +116,8 @@ module.exports = {
           },
         ], // https://github.com/BingKui/javascript-zh#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E5%8F%91%E7%94%9F%E5%99%A8
         'no-iterator': 2, // 禁止使用__iterator__迭代器
-
+        'require-await': 2, // 禁止使用不带 await 表达式的 async 函数
+        'no-empty': 2, // 禁止空块语句
         // 'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
 
         // eslint-plugin-import插件
@@ -188,7 +189,8 @@ module.exports = {
       },
     ], // https://github.com/BingKui/javascript-zh#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E5%8F%91%E7%94%9F%E5%99%A8
     'no-iterator': 2, // 禁止使用__iterator__迭代器
-
+    'require-await': 2, // 禁止使用不带 await 表达式的 async 函数
+    'no-empty': 2, // 禁止空块语句
     // 'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
 
     // eslint-plugin-import插件
