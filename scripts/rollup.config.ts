@@ -34,8 +34,12 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
      * 让rollup支持commonjs 规范，识别 commonjs 规范的依赖。
      */
     commonjs(),
-    nodeResolve(), // 配合@rollup/plugin-commonjs解析第三方模块
-    // dts(),
+    /**
+     * 不使用@rollup/plugin-node-resolve插件的话，import {sum} 'aaa';就不会
+     * 把引入的node_modules包里的aaa的sum的代码引进来，而是会原封不动的把
+     * import {sum} 'aaa';放到打包的代码里面
+     */
+    nodeResolve(),
     typescript({
       abortOnError: false,
     }),
@@ -60,7 +64,7 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
       ...plugins,
       babel({
         exclude: 'node_modules/**', // 只编译我们的源代码
-        extensions: ['.ts'],
+        extensions: [...DEFAULT_EXTENSIONS, '.ts'],
         /**
          * 这里设置plugins会覆盖babel.config.js的plugins，
          * 因此不设置这里的plugins，让它读取babel.config.js的plugins
@@ -126,7 +130,7 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
       ...plugins,
       babel({
         exclude: 'node_modules/**', // 只编译我们的源代码
-        extensions: ['.ts'],
+        extensions: [...DEFAULT_EXTENSIONS, '.ts'],
         /**
          * 这里设置plugins会覆盖babel.config.js的plugins，
          * 因此不设置这里的plugins，让它读取babel.config.js的plugins
