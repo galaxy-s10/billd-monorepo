@@ -1,5 +1,5 @@
 /**
- * @description: 获取dom元素的样式值，注意：如果获取的样式值没有显示的声明，
+ * @description 获取dom元素的样式值，注意：如果获取的样式值没有显示的声明，
  * 会获取到它的默认值，比如position没有设置值，获取它的position就会返回static
  * @param {Element} ele
  * @param {*} styleName
@@ -16,7 +16,7 @@ export const getStyle = (ele: Element, styleName: string) => {
 };
 
 /**
- * @description: 将内容复制到剪切板
+ * @description 将内容复制到剪切板
  * @param {string} text
  * @return {*}
  */
@@ -30,7 +30,8 @@ export const copyToClipBoard = (text: string): void => {
 };
 
 /**
- * @description: 获取滚动条宽度（https://github.com/iview/iview/blob/2.0/src/utils/assist.js#L19）
+ * @description 获取滚动条宽度
+ * @copy https://github.com/iview/iview/blob/2.0/src/utils/assist.js#L19
  * @return {*}
  */
 export const getScrollBarSize = () => {

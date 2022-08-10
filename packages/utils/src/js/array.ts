@@ -1,5 +1,5 @@
 /**
- * @description: 数组去重，缺点不能去除{}
+ * @description 数组去重，缺点不能去除{}
  * @param {Array} arr
  * @return {*} 不修改原数组，返回新数组
  */
@@ -8,7 +8,7 @@ export const arrayUnique = (arr: Array<any>) => {
 };
 
 /**
- * @description: 洗牌算法
+ * @description 洗牌算法
  * @param {Array} arr
  * @return {*} 不修改原数组，返回新数组
  */

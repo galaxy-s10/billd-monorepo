@@ -1,5 +1,5 @@
 /**
- * @description: 正则验证手机号、邮箱是否合法
+ * @description 正则验证手机号、邮箱是否合法
  * @param {string} str
  * @param {*} type
  * @return {*}
@@ -22,7 +22,7 @@ export const regVerify = (str: string, type: 'phone' | 'email') => {
 };
 
 /**
- * @description: 判断字符串的开头和结尾是否有空格，有空格就返回true，否则返回false
+ * @description 判断字符串的开头和结尾是否有空格，有空格就返回true，否则返回false
  * @param {string} value
  * @return {*}
  */

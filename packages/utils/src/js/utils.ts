@@ -1,5 +1,5 @@
 /**
- * @description: 删除对象中值为: null, undefined, NaN, ''的属性
+ * @description 删除对象中值为: null, undefined, NaN, ''的属性
  * @param {any} obj
  * @return {*}
  */
@@ -12,7 +12,7 @@ export const deleteUseLessObjectKey = (obj: any) => {
 };
 
 /**
- * @description: 替换占位符
+ * @description 替换占位符
  * @param {string} str
  * @param {object} obj
  * @return {*} string
@@ -27,7 +27,7 @@ export const replaceKeyFromValue = (str: string, obj: object) => {
 };
 
 /**
- * @description: 判断数据类型
+ * @description 判断数据类型
  * @return {*}
  */
 export const judgeType = (
@@ -59,7 +59,8 @@ export const judgeType = (
 };
 
 /**
- * @description: myName转化为my-name（https://github.com/vueComponent/ant-design-vue/blob/HEAD/antd-tools/generator-types/src/utils.ts）
+ * @description myName转化为my-name
+ * @copy https://github.com/vueComponent/ant-design-vue/blob/HEAD/antd-tools/generator-types/src/utils.ts
  * @param {string} input
  * @return {*}
  */
@@ -70,17 +71,29 @@ export const toKebabCase = (input: string): string =>
   );
 
 /**
- * @description: my-name转化为myName
+ * @description my-name转化为myName
  * @param {string} input
  * @return {*}
  */
-export const toCamel = (input: string): string =>
+export const toCamelCased = (input: string): string =>
   input.replace(/\-(\w)/g, function (all, letter) {
     return letter.toUpperCase();
   });
 
 /**
- * @description: 使用json进行深克隆
+ * @description my-name转化为MyName
+ * @param {string} input
+ * @return {*}
+ */
+export const toPascalCase = (input: string): string => {
+  input.replace(input[0], input[0].toUpperCase());
+  return input.replace(/\-(\w)/g, function (all, letter) {
+    return letter.toUpperCase();
+  });
+};
+
+/**
+ * @description 使用json进行深克隆
  * @param {*} obj
  * @return {*}
  */
@@ -88,7 +101,7 @@ export const deepCloneByJson = <T>(obj: T): T =>
   JSON.parse(JSON.stringify(obj));
 
 /**
- * @description: 手写深拷贝，解决循环引用
+ * @description 手写深拷贝，解决循环引用
  * @param {*} object
  * @return {*}
  */
@@ -115,7 +128,7 @@ export const deepClone = <T>(object: T): T => {
 };
 
 /**
- * @description: 获取[min,max]之间的随机整数。如：[10,30],[-21,32],[-100,-20]
+ * @description 获取[min,max]之间的随机整数。如：[10,30],[-21,32],[-100,-20]
  * @param {number} min
  * @param {number} max
  * @return {*}
@@ -124,7 +137,7 @@ export const getRandomInt = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
 /**
- * @description: 随机数组的一个元素
+ * @description 随机数组的一个元素
  * @param {any} arr
  * @return {*}
  */
@@ -132,7 +145,7 @@ export const getRandomOne = (arr: any[]) =>
   arr[Math.floor(Math.random() * arr.length)];
 
 /**
- * @description: 获取随机字符串
+ * @description 获取随机字符串
  * @param {number} length
  * @return {*}
  */
@@ -146,7 +159,7 @@ export const getRandomString = (length: number): string => {
 };
 
 /**
- * @description: 防抖函数（Promise）
+ * @description 防抖函数（Promise）
  * @param {Function} fn 函数
  * @param {number} delay 延迟时间
  * @param {boolean} leading 首次立即执行
@@ -190,7 +203,7 @@ export const debounce = (fn: Function, delay: number, leading = false) => {
 };
 
 /**
- * @description: 节流函数（Promise）
+ * @description 节流函数（Promise）
  * @param {Function} fn 函数
  * @param {number} interval 间隔
  * @param {boolean} trailing 最后一次执行

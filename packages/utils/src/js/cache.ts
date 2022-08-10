@@ -1,6 +1,6 @@
 export class CacheModel {
   /**
-   * @description: 获取缓存
+   * @description 获取缓存
    * @param {string} key
    * @return {*}
    */
@@ -15,7 +15,7 @@ export class CacheModel {
   };
 
   /**
-   * @description: 设置缓存
+   * @description 设置缓存
    * @param {*} key
    * @param {*} value
    */
@@ -29,7 +29,7 @@ export class CacheModel {
   };
 
   /**
-   * @description: 清除缓存
+   * @description 清除缓存
    * @param {*} key
    */
   clearStorage = (key: string) => {
@@ -37,7 +37,7 @@ export class CacheModel {
   };
 
   /**
-   * @description: 获取缓存，如果缓存已过期，会清除该缓存并返回null
+   * @description 获取缓存，如果缓存已过期，会清除该缓存并返回null
    * @param {*} key
    */
   getStorageExp = (key: string) => {
@@ -61,7 +61,7 @@ export class CacheModel {
   };
 
   /**
-   * @description: 设置缓存以及缓存时长
+   * @description 设置缓存以及缓存时长
    * @param {*} key
    * @param {*} value
    * @param {*} expires 缓存时长，单位：小时

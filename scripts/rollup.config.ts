@@ -13,7 +13,7 @@ import typescript from 'rollup-plugin-typescript2';
 
 import { packages } from '../meta/packages';
 import pkg from '../package.json';
-import { toCamel } from '../packages/utils';
+import { toPascalCase } from '../packages/utils';
 
 const external = [...Object.keys(pkg.dependencies || {})].map((name) =>
   RegExp(`^${name}($|/)`)
@@ -87,7 +87,7 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
       output: {
         file: path.resolve(__dirname, `packages/${name}/dist/index.js`),
         format: 'umd',
-        name: toCamel(`Billd-${name}`),
+        name: toPascalCase(`Billd-${name}`),
       },
       plugins: [...umdConfigPlugins],
     });
@@ -96,7 +96,7 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
       output: {
         file: path.resolve(__dirname, `packages/${name}/dist/index.min.js`),
         format: 'umd',
-        name: toCamel(`Billd-${name}`),
+        name: toPascalCase(`Billd-${name}`),
       },
       plugins: [
         ...umdConfigPlugins,
@@ -116,7 +116,7 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
       input,
       output: {
         file: path.resolve(__dirname, `packages/${name}/dist/index.d.ts`),
-        name: toCamel(`Billd-${name}`),
+        name: toPascalCase(`Billd-${name}`),
       },
       plugins: [dtsPlugin()],
     });

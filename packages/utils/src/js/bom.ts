@@ -1,5 +1,5 @@
 /**
- * @description: 判断设备类型
+ * @description 判断设备类型
  * @return {*}
  */
 export const judgeDevice = () => {
@@ -16,7 +16,7 @@ export const judgeDevice = () => {
 };
 
 /**
- * @description: 判断是否是浏览器环境
+ * @description 判断是否是浏览器环境
  * @param {*} boolean
  * @return {*}
  */
@@ -26,7 +26,7 @@ export const isBrowser = () =>
   typeof window.document.createElement !== 'undefined';
 
 /**
- * @description: 判断是否是Safari浏览器
+ * @description 判断是否是Safari浏览器
  * @return {*}
  */
 export const isSafari = () => {
@@ -36,7 +36,7 @@ export const isSafari = () => {
 };
 
 /**
- * @description: 判断是否是ie浏览器
+ * @description 判断是否是ie浏览器
  * @return {*}
  */
 export const isIe = () => {
@@ -46,7 +46,7 @@ export const isIe = () => {
   );
 };
 /**
- * @description: 判断是否是Firefox浏览器
+ * @description 判断是否是Firefox浏览器
  * @return {*}
  */
 export const isFirefox = () => {
@@ -54,7 +54,7 @@ export const isFirefox = () => {
 };
 
 /**
- * @description: 判断是否是支持webp
+ * @description 判断是否是支持webp
  * @return {*}
  */
 export const isSupportWebp = () => {
