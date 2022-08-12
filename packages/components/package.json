@@ -1,12 +1,12 @@
 {
   "name": "@huangshuisheng/components",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Billd's components",
   "keywords": [
     "billd",
     "components"
   ],
-  "homepage": "http://project.hsslive.cn/billd-monorepo/",
+  "homepage": "http://project.hsslive.cn/billd-monorepo",
   "bugs": {
     "url": "https://github.com/galaxy-s10/billd-monorepo/issues"
   },
