@@ -4,8 +4,8 @@ import path from 'path';
 import { packages } from '../meta/packages';
 import { chalkSUCCESS } from './utils';
 
-execSync('npm run build', { stdio: 'inherit' });
-execSync('npm run update', { stdio: 'inherit' });
+// execSync('npm run build', { stdio: 'inherit' });
+// execSync('npm run update', { stdio: 'inherit' });
 
 // 发布私有包需要添加--access public
 const command = 'npm publish --access public';

@@ -22,55 +22,37 @@ npm install '@huangshuisheng/components';
 2. [@huangshuisheng/components](https://github.com/galaxy-s10/billd-monorepo/blob/master/packages/components/README.md)
 3. [@huangshuisheng/hooks](https://github.com/galaxy-s10/billd-monorepo/blob/master/packages/hooks/README.md)
 
-# 更新 ci 版本号
-
-> [https://docs.npmjs.com/cli/v8/commands/npm-version](https://docs.npmjs.com/cli/v8/commands/npm-version)
-
-```sh
-npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
-
-alias: verison
-```
-
-或者：
-
-```sh
-pnpm run release
-```
-
-# 调试 packages 里所有的包
+# 调试
 
 ```sh
 pnpm run dev
 ```
 
-# 更新 packages 里所有的包
-
-> 请先更新 ci 版本号，然后再执行该命令
-
-```sh
-pnpm run update
-```
-
-# 构建 packages 里所有的包
+# 构建
 
 ```sh
 pnpm run build
 ```
 
-# 生成 packages 里的包文档
+# 更新版本
 
 ```sh
-pnpm run doc
+pnpm run release
 ```
 
-# 发布 packages 里所有的包
+# 发布 npm
 
 ```sh
 pnpm run publish
 ```
 
-# 扩展 packages 里的包
+# 生成文档
+
+```sh
+pnpm run doc
+```
+
+# 扩展
 
 假设我要给 monorepo 新增一个 vue3hooks 包：
 
