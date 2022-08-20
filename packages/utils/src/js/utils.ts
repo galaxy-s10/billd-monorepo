@@ -128,37 +128,6 @@ export const deepClone = <T>(object: T): T => {
 };
 
 /**
- * @description 获取[min,max]之间的随机整数。如：[10,30],[-21,32],[-100,-20]
- * @param {number} min
- * @param {number} max
- * @return {*}
- */
-export const getRandomInt = (min: number, max: number) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
-
-/**
- * @description 随机数组的一个元素
- * @param {any} arr
- * @return {*}
- */
-export const getRandomOne = (arr: any[]) =>
-  arr[Math.floor(Math.random() * arr.length)];
-
-/**
- * @description 获取随机字符串
- * @param {number} length
- * @return {*}
- */
-export const getRandomString = (length: number): string => {
-  const str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let res = '';
-  for (let i = 0; i < length; i += 1) {
-    res += str.charAt(getRandomInt(0, str.length - 1));
-  }
-  return res;
-};
-
-/**
  * @description 防抖函数（Promise）
  * @param {Function} fn 函数
  * @param {number} delay 延迟时间
@@ -214,7 +183,9 @@ export const throttle = (fn: Function, interval: number, trailing = false) => {
   let timer;
   return function () {
     // @ts-ignore
+    // eslint-disable-next-line no-underscore-dangle
     const _this = this;
+    // eslint-disable-next-line no-underscore-dangle
     const _arguments = arguments;
     const newTime = new Date().getTime();
 

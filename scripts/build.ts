@@ -11,14 +11,13 @@ const clean = async () => {
 };
 
 // rollup打包
-const rollupBuild = async () => {
+const rollupBuild = () => {
   try {
     execSync('pnpm run build:rollup');
   } catch (error) {
     console.log(error);
   }
 };
-
 // 项目的根目录路径
 const rootDir = path.resolve(__dirname, '..');
 
@@ -29,7 +28,7 @@ const FILES_COPY_ROOT = ['LICENSE'];
 const FILES_COPY_LOCAL = ['README.md', 'package.json'];
 
 // 将packages里面的包的package.json和README.md复制到构建目录
-const copyFile = async () => {
+const copyFile = () => {
   try {
     Object.values(packages).forEach(({ name }) => {
       const packageRoot = path.resolve(__dirname, '..', 'packages', name);

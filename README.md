@@ -36,11 +36,15 @@ pnpm run build
 
 # 更新版本
 
+> 操作的是 github
+
 ```sh
 pnpm run release
 ```
 
-# 发布 npm
+# 发布版本
+
+> 操作的是 npm
 
 ```sh
 pnpm run publish
@@ -62,4 +66,4 @@ pnpm run doc
 4. 在 vue3hooks 新建一个 README.md 文件
 5. 在 meta/packages.ts 文件新增该包的信息
 6. 在根目录的 typedoc.config.json 文件添加 vue3hooks 的入口文件
-7. 执行 pnpm run build && pnpm run update && pnpm run publish
+7. 执行 pnpm run build && pnpm run release, 最后: pnpm run publish

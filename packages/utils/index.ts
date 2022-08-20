@@ -5,3 +5,5 @@ export * from './src/js/url';
 export * from './src/js/cache';
 export * from './src/js/utils';
 export * from './src/js/array';
+export * from './src/js/random';
+export * from './src/js/format';

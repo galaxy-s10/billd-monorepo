@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+
 console.log(
   `${chalk.bgBlueBright.black(' INFO ')} ${chalk.blueBright(
     `读取了: ${__filename.slice(__dirname.length + 1)}`
@@ -82,6 +83,7 @@ module.exports = {
             },
           },
         ],
+        camelcase: 1, // 强制执行驼峰命名约定
         'no-console': 0, // 此规则不允许调用console对象的方法。
         'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }], // 该规则强制注释中 // 或 /* 后空格的一致性
         'no-var': 2, // 要求let或const代替var
@@ -118,12 +120,23 @@ module.exports = {
         'no-iterator': 2, // 禁止使用__iterator__迭代器
         'require-await': 2, // 禁止使用不带 await 表达式的 async 函数
         'no-empty': 2, // 禁止空块语句
-        // 'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
+        'guard-for-in': 2, // 要求for-in循环包含if语句
+        'global-require': 2, // 此规则要求所有调用require()都在模块的顶层，此规则在 ESLint v7.0.0中已弃用。请使用 中的相应规则eslint-plugin-node：https://github.com/mysticatea/eslint-plugin-node
+        'no-underscore-dangle': 1, // 此规则不允许在标识符中使用悬空下划线。
+        'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
+        'no-unused-expressions': [
+          2,
+          {
+            allowShortCircuit: true, // 允许短路
+            allowTernary: true, // 允许三元
+          },
+        ], // 禁止未使用的表达式，即let a = true && console.log(1)允许，但是true && console.log(1)不行
 
         // eslint-plugin-import插件
+        'import/newline-after-import': 2, // 强制在最后一个顶级导入语句或 require 调用之后有一个或多个空行
         'import/no-extraneous-dependencies': 2, // 禁止导入未在package.json中声明的外部模块。
         'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
-        'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀，这样就没办法引其他类型文件
+        'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀，这样的话就没办法引其他类型文件，因此关掉
         'import/no-unresolved': 0, // 不能解析带别名的路径的模块，但实际上是不影响代码运行的。找不到解决办法，暂时关掉。
       },
     },
@@ -155,6 +168,7 @@ module.exports = {
         },
       },
     ],
+    camelcase: 1, // 强制执行驼峰命名约定
     'no-console': 0, // 此规则不允许调用console对象的方法。
     'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }], // 该规则强制注释中 // 或 /* 后空格的一致性
     'no-var': 2, // 要求let或const代替var
@@ -191,12 +205,23 @@ module.exports = {
     'no-iterator': 2, // 禁止使用__iterator__迭代器
     'require-await': 2, // 禁止使用不带 await 表达式的 async 函数
     'no-empty': 2, // 禁止空块语句
-    // 'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
+    'guard-for-in': 2, // 要求for-in循环包含if语句
+    'global-require': 2, // 此规则要求所有调用require()都在模块的顶层，此规则在 ESLint v7.0.0中已弃用。请使用 中的相应规则eslint-plugin-node：https://github.com/mysticatea/eslint-plugin-node
+    'no-underscore-dangle': 1, // 此规则不允许在标识符中使用悬空下划线。
+    'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
+    'no-unused-expressions': [
+      2,
+      {
+        allowShortCircuit: true, // 允许短路
+        allowTernary: true, // 允许三元
+      },
+    ], // 禁止未使用的表达式，即let a = true && console.log(1)允许，但是true && console.log(1)不行
 
     // eslint-plugin-import插件
+    'import/newline-after-import': 2, // 强制在最后一个顶级导入语句或 require 调用之后有一个或多个空行
     'import/no-extraneous-dependencies': 2, // 禁止导入未在package.json中声明的外部模块。
     'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
-    'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀，这样就没办法引其他类型文件
+    'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀，这样的话就没办法引其他类型文件，因此关掉
     'import/no-unresolved': 0, // 不能解析带别名的路径的模块，但实际上是不影响代码运行的。找不到解决办法，暂时关掉。
   },
 };
