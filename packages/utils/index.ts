@@ -1,3 +1,7 @@
+import pkg from './package.json';
+
+export const version = pkg.version;
+
 export * from './src/js/dom';
 export * from './src/js/bom';
 export * from './src/js/reg';

@@ -3,10 +3,9 @@ import path from 'path';
 import { DEFAULT_EXTENSIONS } from '@babel/core';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'rollup';
-import { RollupOptions } from 'rollup';
-import { OutputOptions } from 'rollup';
 import dtsPlugin from 'rollup-plugin-dts';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
@@ -15,10 +14,12 @@ import { packages } from '../meta/packages';
 import pkg from '../package.json';
 import { toPascalCase } from '../packages/utils';
 
+import type { RollupOptions } from 'rollup';
+import type { OutputOptions } from 'rollup';
+
 const external = [...Object.keys(pkg.dependencies || {})].map((name) =>
   RegExp(`^${name}($|/)`)
 );
-
 const configs: RollupOptions[] = [];
 
 const umdConfig: RollupOptions[] = [];
@@ -43,6 +44,7 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
     typescript({
       abortOnError: false,
     }),
+    json(),
   ];
 
   if (esm !== false) {

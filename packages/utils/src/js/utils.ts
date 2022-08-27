@@ -141,24 +141,24 @@ export const debounce = (fn: Function, delay: number, leading = false) => {
       clearTimeout(timer);
     }
     // @ts-ignore
-    const _this = this;
-    const _arguments = arguments;
+    const that = this;
+    const args = arguments;
     return new Promise((resolve) => {
       if (leading) {
         let isFirst = false;
         if (!timer) {
-          resolve(fn.apply(_this, _arguments));
+          resolve(fn.apply(that, args));
           isFirst = true;
         }
         timer = setTimeout(() => {
           timer = null;
           if (!isFirst) {
-            resolve(fn.apply(_this, _arguments));
+            resolve(fn.apply(that, args));
           }
         }, delay);
       } else {
         timer = setTimeout(() => {
-          resolve(fn.apply(_this, _arguments));
+          resolve(fn.apply(that, args));
         }, delay);
       }
     });
@@ -183,10 +183,8 @@ export const throttle = (fn: Function, interval: number, trailing = false) => {
   let timer;
   return function () {
     // @ts-ignore
-    // eslint-disable-next-line no-underscore-dangle
-    const _this = this;
-    // eslint-disable-next-line no-underscore-dangle
-    const _arguments = arguments;
+    const that = this;
+    const args = arguments;
     const newTime = new Date().getTime();
 
     if (timer) {
@@ -196,16 +194,27 @@ export const throttle = (fn: Function, interval: number, trailing = false) => {
     let result;
     return new Promise((resolve) => {
       if (newTime - lastTime > interval) {
-        result = fn.apply(_this, _arguments);
+        result = fn.apply(that, args);
         resolve(result);
 
         lastTime = newTime;
       } else if (trailing) {
         timer = setTimeout(() => {
-          result = fn.apply(_this, _arguments);
+          result = fn.apply(that, args);
           resolve(result);
         }, interval);
       }
     });
   };
+};
+
+/**
+ * @description 生成uuid
+ * @return {*}
+ */
+export const generateUuid = () => {
+  const tempUrl = URL.createObjectURL(new Blob());
+  const uuid = tempUrl.toString(); // blob:null/9d24f135-3e33-46b7-b51f-dc5b8121d60a
+  URL.revokeObjectURL(tempUrl);
+  return uuid.split('/')[1];
 };

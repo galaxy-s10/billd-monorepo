@@ -131,6 +131,7 @@ module.exports = {
             allowTernary: true, // 允许三元
           },
         ], // 禁止未使用的表达式，即let a = true && console.log(1)允许，但是true && console.log(1)不行
+        'object-shorthand': ['error', 'always'], // （默认）希望尽可能使用速记。var foo = {x:x};替换为var foo = {x};
 
         // eslint-plugin-import插件
         'import/newline-after-import': 2, // 强制在最后一个顶级导入语句或 require 调用之后有一个或多个空行
@@ -138,6 +139,8 @@ module.exports = {
         'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
         'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀，这样的话就没办法引其他类型文件，因此关掉
         'import/no-unresolved': 0, // 不能解析带别名的路径的模块，但实际上是不影响代码运行的。找不到解决办法，暂时关掉。
+        'import/no-named-as-default-member': 1, // import vue from 'vue';console.log(vue.version)，如果vue有导出version，会提示替换为import { version } from 'vue';
+        'import/named': 2, // 如：import { version } from 'vuex'，会验证vuex有没有具名导出version
       },
     },
   ],
@@ -216,6 +219,7 @@ module.exports = {
         allowTernary: true, // 允许三元
       },
     ], // 禁止未使用的表达式，即let a = true && console.log(1)允许，但是true && console.log(1)不行
+    'object-shorthand': ['error', 'always'], // （默认）希望尽可能使用速记。var foo = {x:x};替换为var foo = {x};
 
     // eslint-plugin-import插件
     'import/newline-after-import': 2, // 强制在最后一个顶级导入语句或 require 调用之后有一个或多个空行
@@ -223,5 +227,7 @@ module.exports = {
     'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
     'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀，这样的话就没办法引其他类型文件，因此关掉
     'import/no-unresolved': 0, // 不能解析带别名的路径的模块，但实际上是不影响代码运行的。找不到解决办法，暂时关掉。
+    'import/no-named-as-default-member': 1, // import vue from 'vue';console.log(vue.version)，如果vue有导出version，会提示替换为import { version } from 'vue';
+    'import/named': 2, // 如：import { version } from 'vuex'，会验证vuex有没有具名导出version
   },
 };

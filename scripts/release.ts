@@ -73,6 +73,9 @@ const selectReleaseVersion = async () => {
     // git push
     // execSync(`git push origin v${targetVersion}`, { stdio: 'inherit' });
     // execSync(`git push`, { stdio: 'inherit' });
+
+    // pnpm run build
+    execSync(`pnpm run build`, { stdio: 'inherit' });
   } else {
     console.log(chalkERROR(`取消发布！`));
   }
