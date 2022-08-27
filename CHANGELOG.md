@@ -1,3 +1,13 @@
+## [0.0.7](https://github.com/galaxy-s10/billd-monorepo/compare/v0.0.6...v0.0.7) (2022-08-27)
+
+
+### Features
+
+* 新增version ([9425315](https://github.com/galaxy-s10/billd-monorepo/commit/9425315a68473cf99640d4a805a21932fafbdfa1))
+* 优化random ([1fd868f](https://github.com/galaxy-s10/billd-monorepo/commit/1fd868f2e840d9f90adadad6a9133d54a9c6d402))
+
+
+
 ## [0.0.6](https://github.com/galaxy-s10/billd-monorepo/compare/v0.0.5...v0.0.6) (2022-08-12)
 
 
