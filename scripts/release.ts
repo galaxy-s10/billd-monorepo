@@ -70,10 +70,6 @@ const selectReleaseVersion = async () => {
     // git tag
     execSync(`git tag v${targetVersion}`, { stdio: 'inherit' });
 
-    // git push
-    // execSync(`git push origin v${targetVersion}`, { stdio: 'inherit' });
-    // execSync(`git push`, { stdio: 'inherit' });
-
     // pnpm run build
     execSync(`pnpm run build`, { stdio: 'inherit' });
   } else {

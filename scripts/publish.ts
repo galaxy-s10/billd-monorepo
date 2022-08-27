@@ -2,13 +2,15 @@ import { execSync } from 'child_process';
 import path from 'path';
 
 import { packages } from '../meta/packages';
+import pkg from '../package.json';
 import { chalkSUCCESS } from './utils';
-
-// execSync('npm run build', { stdio: 'inherit' });
-// execSync('npm run update', { stdio: 'inherit' });
 
 // 发布私有包需要添加--access public
 const command = 'npm publish --access public';
+
+// git push
+execSync(`git push origin v${pkg.version}`, { stdio: 'inherit' });
+execSync(`git push`, { stdio: 'inherit' });
 
 Object.values(packages).forEach(({ name }) => {
   execSync(command, {
