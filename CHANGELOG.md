@@ -1,3 +1,16 @@
+## [0.0.8](https://github.com/galaxy-s10/billd-monorepo/compare/v0.0.7...v0.0.8) (2022-09-02)
+
+
+### feat
+
+* 修改脚本 ([1e6a857](https://github.com/galaxy-s10/billd-monorepo/commit/1e6a8570b2714f40206f0183597dbb4931e11ee4))
+
+### fix
+
+* 修改脚本 ([7d28f83](https://github.com/galaxy-s10/billd-monorepo/commit/7d28f83294769a345d0c92c056aa7cd0a76021e8))
+
+
+
 ## [0.0.7](https://github.com/galaxy-s10/billd-monorepo/compare/v0.0.6...v0.0.7) (2022-08-27)
 
 
