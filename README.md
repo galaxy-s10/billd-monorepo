@@ -36,18 +36,14 @@ pnpm run build
 
 # 更新版本
 
-> 操作的是 github
-
 ```sh
 pnpm run release
 ```
 
 # 发布版本
 
-> 操作的是 npm
-
 ```sh
-pnpm run publish
+pnpm run mypublish
 ```
 
 # 生成文档

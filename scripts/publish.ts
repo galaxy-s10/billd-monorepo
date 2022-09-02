@@ -17,5 +17,5 @@ Object.values(packages).forEach(({ name }) => {
     stdio: 'inherit',
     cwd: path.resolve(__dirname, '../packages', name, 'dist'),
   });
-  console.log(chalkSUCCESS(`Published @huangshuisheng/${name}`));
+  console.log(chalkSUCCESS(`发布@huangshuisheng/${name}@${pkg.version}成功！`));
 });
