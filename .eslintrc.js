@@ -63,9 +63,13 @@ module.exports = {
          * 1 => warn
          * 2 => error
          */
-        camelcase: 1, // 强制执行驼峰命名约定
+
+        'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
         'no-console': 0, // 此规则不允许调用console对象的方法。
-        'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }], // 该规则强制注释中 // 或 /* 后空格的一致性
+
+        camelcase: 1, // 强制执行驼峰命名约定
+        'no-underscore-dangle': 1, // 此规则不允许在标识符中使用悬空下划线。
+
         'no-var': 2, // 要求let或const代替var
         'no-shadow': 2, // 禁止变量声明与外层作用域的变量同名
         'no-param-reassign': 2, // 禁止对 function 的参数进行重新赋值
@@ -76,9 +80,20 @@ module.exports = {
         'prefer-const': 2, // 要求使用 const 声明那些声明后不再被修改的变量
         'prefer-template': 2, // 要求使用模板字符串代替字符串连接
         'new-cap': 2, // 要求构造函数名称以大写字母开头
+        'no-iterator': 2, // 禁止使用__iterator__迭代器
+        'require-await': 2, // 禁止使用不带 await 表达式的 async 函数
+        'no-empty': 2, // 禁止空块语句
+        'guard-for-in': 2, // 要求for-in循环包含if语句
+        'global-require': 2, // 此规则要求所有调用require()都在模块的顶层，此规则在 ESLint v7.0.0中已弃用。请使用 中的相应规则eslint-plugin-node：https://github.com/mysticatea/eslint-plugin-node
+        'no-unused-expressions': [
+          2,
+          {
+            allowShortCircuit: true, // 允许短路，即允许a() && b();
+            allowTernary: true, // 允许三元
+          },
+        ], // 禁止未使用的表达式
         'no-restricted-syntax': [
-          // 禁用一些语法
-          'error',
+          2,
           // 'ForInStatement',
           // 'ForOfStatement',
           {
@@ -96,26 +111,23 @@ module.exports = {
             message:
               '建议使用map/every/filter等遍历数组，使用Object.{keys,values,entries}等遍历对象',
           },
-        ], // https://github.com/BingKui/javascript-zh#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E5%8F%91%E7%94%9F%E5%99%A8
-        'no-iterator': 2, // 禁止使用__iterator__迭代器
-        'require-await': 2, // 禁止使用不带 await 表达式的 async 函数
-        'no-empty': 2, // 禁止空块语句
-        'guard-for-in': 2, // 要求for-in循环包含if语句
-        'global-require': 2, // 此规则要求所有调用require()都在模块的顶层，此规则在 ESLint v7.0.0中已弃用。请使用 中的相应规则eslint-plugin-node：https://github.com/mysticatea/eslint-plugin-node
-        'no-underscore-dangle': 1, // 此规则不允许在标识符中使用悬空下划线。
-        'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
-        'no-unused-expressions': [
-          2,
-          {
-            allowShortCircuit: true, // 允许短路
-            allowTernary: true, // 允许三元
-          },
-        ], // 禁止未使用的表达式，即let a = true && console.log(1)允许，但是true && console.log(1)不行
+        ], // 禁用一些语法https://github.com/BingKui/javascript-zh#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E5%8F%91%E7%94%9F%E5%99%A8
+
         'object-shorthand': ['error', 'always'], // （默认）希望尽可能使用速记。var foo = {x:x};替换为var foo = {x};
+        'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }], // 该规则强制注释中 // 或 /* 后空格的一致性
 
         // eslint-plugin-import插件
+        'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
+        'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀，这样的话就没办法引其他类型文件，因此关掉
+        'import/no-unresolved': 0, // 不能解析带别名的路径的模块，但实际上是不影响代码运行的。找不到解决办法，暂时关掉。
+
+        'import/no-named-as-default-member': 1, // import vue from 'vue';console.log(vue.version)，如果vue有导出version，会提示替换为import { version } from 'vue';
+
+        'import/named': 2, // 如：import { version } from 'vuex'，会验证vuex有没有具名导出version
+        'import/newline-after-import': 2, // 强制在最后一个顶级导入语句或 require 调用之后有一个或多个空行
+        'import/no-extraneous-dependencies': 2, // 禁止导入未在package.json中声明的外部模块。
         'import/order': [
-          'error',
+          2,
           {
             groups: [
               'builtin',
@@ -134,13 +146,6 @@ module.exports = {
             },
           },
         ],
-        'import/newline-after-import': 2, // 强制在最后一个顶级导入语句或 require 调用之后有一个或多个空行
-        'import/no-extraneous-dependencies': 2, // 禁止导入未在package.json中声明的外部模块。
-        'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
-        'import/extensions': 0, // 确保在导入路径中一致使用文件扩展名。在js/ts等文件里引其他文件都不能带后缀，这样的话就没办法引其他类型文件，因此关掉
-        'import/no-unresolved': 0, // 不能解析带别名的路径的模块，但实际上是不影响代码运行的。找不到解决办法，暂时关掉。
-        'import/no-named-as-default-member': 1, // import vue from 'vue';console.log(vue.version)，如果vue有导出version，会提示替换为import { version } from 'vue';
-        'import/named': 2, // 如：import { version } from 'vuex'，会验证vuex有没有具名导出version
       },
     },
   ],

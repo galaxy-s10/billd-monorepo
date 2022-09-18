@@ -1,18 +1,23 @@
 /**
+ * @description 判断是否是移动端（判断比较粗糙）
+ * @return {*}
+ */
+export const isMobile = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+};
+
+/**
  * @description 判断设备类型
  * @return {*}
  */
 export const judgeDevice = () => {
-  const ua = navigator.userAgent.toLowerCase();
-  console.log(ua);
-  const isAndroid = ua.indexOf('android') !== -1; // Android
-  const isIOS = ua.indexOf('iphone os') !== -1; // iOS
-  const isIpad = ua.indexOf('ipad') !== -1; // ipad
-  return {
-    isAndroid,
-    isIOS,
-    isIpad,
-  };
+  const ua = navigator.userAgent;
+  const isAndroid = /(Android)/i.test(ua);
+  const isIphone = /(iPhone|iPad|iPod|iOS)/i.test(ua);
+
+  return { isAndroid, isIphone };
 };
 
 /**
