@@ -1,3 +1,12 @@
+## [0.0.9](https://github.com/galaxy-s10/billd-monorepo/compare/v0.0.8...v0.0.9) (2022-09-18)
+
+
+### feat
+
+* 优化所有脚本 ([5ea80a4](https://github.com/galaxy-s10/billd-monorepo/commit/5ea80a4bef12a70a95ae0d5b4192f5523c98f906))
+
+
+
 ## [0.0.8](https://github.com/galaxy-s10/billd-monorepo/compare/v0.0.7...v0.0.8) (2022-09-02)
 
 
