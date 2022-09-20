@@ -11,6 +11,8 @@
     "forceConsistentCasingInFileNames": true, //在文件名中强制使用一致的大小写
     "skipLibCheck": true, // 跳过d.ts声明文件的类型检查。
     "baseUrl": "./",
+    // "sourceMap": true, // 是否生成sourceMap
+    // "noEmitOnError": false,
     // "declaration": true, // 生成.d.ts文件
     // "declarationDir": "./types", //生成.d.ts文件的目录
     "resolveJsonModule": true // 解析json模块
@@ -30,7 +32,6 @@
   // "exclude": ["**/*.d.ts"],
   "include": [
     "packages/**/*.ts",
-    "scripts/rollup.config.ts",
-    "rollup.config.ts"
+    "scripts/rollup.config.ts" //https://rollupjs.org/guide/en/#--configplugin-plugin
   ] // 仅仅匹配这些文件
 }

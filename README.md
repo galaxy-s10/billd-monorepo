@@ -13,7 +13,7 @@
 </h1>
 
 <p align="center">
-  基于rollup + pnpm搭建的Billd-Monorepo
+  基于rollup + pnpm + esbuild搭建的Billd-Monorepo
 </p>
 
 <div align="center">
@@ -49,6 +49,8 @@ npm install '@huangshuisheng/components';
 具体用法请查看文档：[http://project.hsslive.cn/billd-monorepo/](http://project.hsslive.cn/billd-monorepo/)
 
 # 本地调试
+
+> 本地调试不会构建 umd
 
 ```sh
 npm run dev

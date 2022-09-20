@@ -6,6 +6,8 @@ import { copyFileSync } from 'fs-extra';
 import { packages } from '../meta/packages';
 import { chalkERROR } from './utils';
 
+const watch = process.argv.includes('--watch');
+
 // 项目的根目录路径
 const rootDir = path.resolve(__dirname, '..');
 
@@ -22,32 +24,23 @@ const clean = () => {
 
 // rollup打包
 const rollupBuild = () => {
-  try {
-    execSync('pnpm run build:rollup', { stdio: 'inherit' });
-  } catch (error) {
-    console.log(error);
-  }
+  execSync(`pnpm run build:rollup${watch ? ' --watch' : ''}`, {
+    stdio: 'inherit',
+  });
 };
 
 // 将packages里面的包的package.json和README.md复制到构建目录
 const copyFile = () => {
-  try {
-    Object.values(packages).forEach(({ name }) => {
-      const packageRoot = path.resolve(__dirname, '..', 'packages', name);
-      const packageDist = path.resolve(packageRoot, 'dist');
-      Object.values(FILES_COPY_LOCAL).forEach((file) => {
-        copyFileSync(
-          path.join(packageRoot, file),
-          path.join(packageDist, file)
-        );
-      });
-      Object.values(FILES_COPY_ROOT).forEach((file) => {
-        copyFileSync(path.join(rootDir, file), path.join(packageDist, file));
-      });
+  Object.values(packages).forEach(({ name }) => {
+    const packageRoot = path.resolve(__dirname, '..', 'packages', name);
+    const packageDist = path.resolve(packageRoot, 'dist');
+    Object.values(FILES_COPY_LOCAL).forEach((file) => {
+      copyFileSync(path.join(packageRoot, file), path.join(packageDist, file));
     });
-  } catch (error) {
-    console.log(error);
-  }
+    Object.values(FILES_COPY_ROOT).forEach((file) => {
+      copyFileSync(path.join(rootDir, file), path.join(packageDist, file));
+    });
+  });
 };
 
 (() => {

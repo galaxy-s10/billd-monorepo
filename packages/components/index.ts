@@ -1,5 +1,5 @@
-import pkg from './package.json';
+import { version as __VERSION__ } from './package.json';
 
-export const version = pkg.version;
+export const version = __VERSION__;
 
 export * from './src/ScratchCanvas';
