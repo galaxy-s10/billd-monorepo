@@ -76,15 +76,8 @@ module.exports = {
         'no-nested-ternary': 2, // 禁止嵌套三元
         'no-plusplus': 2, // 禁用一元操作符 ++ 和 --
         'no-unused-vars': 2, // 禁止出现未使用过的变量
-        'vars-on-top': 2, // 要求所有的 var 声明出现在它们所在的作用域顶部
-        'prefer-const': 2, // 要求使用 const 声明那些声明后不再被修改的变量
-        'prefer-template': 2, // 要求使用模板字符串代替字符串连接
-        'new-cap': 2, // 要求构造函数名称以大写字母开头
         'no-iterator': 2, // 禁止使用__iterator__迭代器
-        'require-await': 2, // 禁止使用不带 await 表达式的 async 函数
         'no-empty': 2, // 禁止空块语句
-        'guard-for-in': 2, // 要求for-in循环包含if语句
-        'global-require': 2, // 此规则要求所有调用require()都在模块的顶层，此规则在 ESLint v7.0.0中已弃用。请使用 中的相应规则eslint-plugin-node：https://github.com/mysticatea/eslint-plugin-node
         'no-unused-expressions': [
           2,
           {
@@ -112,6 +105,13 @@ module.exports = {
               '建议使用map/every/filter等遍历数组，使用Object.{keys,values,entries}等遍历对象',
           },
         ], // 禁用一些语法https://github.com/BingKui/javascript-zh#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E5%8F%91%E7%94%9F%E5%99%A8
+        'vars-on-top': 2, // 要求所有的 var 声明出现在它们所在的作用域顶部
+        'prefer-const': 2, // 要求使用 const 声明那些声明后不再被修改的变量
+        'prefer-template': 2, // 要求使用模板字符串代替字符串连接
+        'new-cap': 2, // 要求构造函数名称以大写字母开头
+        'require-await': 2, // 禁止使用不带 await 表达式的 async 函数
+        'guard-for-in': 2, // 要求for-in循环包含if语句
+        'global-require': 2, // 此规则要求所有调用require()都在模块的顶层，此规则在 ESLint v7.0.0中已弃用。请使用 中的相应规则eslint-plugin-node：https://github.com/mysticatea/eslint-plugin-node
 
         'object-shorthand': ['error', 'always'], // （默认）希望尽可能使用速记。var foo = {x:x};替换为var foo = {x};
         'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }], // 该规则强制注释中 // 或 /* 后空格的一致性

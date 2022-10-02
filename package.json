@@ -20,6 +20,7 @@
   },
   "license": "MIT",
   "author": "shuisheng <https://github.com/galaxy-s10>",
+  "sideEffects": false,
   "scripts": {
     "build": "ts-node ./scripts/build.ts",
     "build:rollup": "rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",

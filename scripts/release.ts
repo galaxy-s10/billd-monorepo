@@ -60,6 +60,9 @@ const selectReleaseVersion = async () => {
     // 更新packages/*的package.json
     updatePackageJSON();
 
+    // pnpm run build
+    execSync(`pnpm run build`, { stdio: 'inherit' });
+
     // 生成changelog
     execSync(`pnpm run changelog`, { stdio: 'inherit' });
 
@@ -71,9 +74,6 @@ const selectReleaseVersion = async () => {
 
     // git tag
     execSync(`git tag v${targetVersion}`, { stdio: 'inherit' });
-
-    // pnpm run build
-    execSync(`pnpm run build`, { stdio: 'inherit' });
   } else {
     console.log(chalkERROR(`取消本地发布！`));
   }

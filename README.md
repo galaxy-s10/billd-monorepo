@@ -62,6 +62,12 @@ npm run dev
 npm run build
 ```
 
+> 该脚本内部会做以下事情：
+
+1. 根据 meta/packages.ts，删除 packages 里对应的包的 dist
+2. 根据 meta/packages.ts，打包 packages 里对应的包，生成 dist
+3. 根据 meta/packages.ts，复制 packages 里对应的包的 package.json 和 README.md，以及项目根目录的 LICENSE 文件，复制到对应包的 dist
+
 # 生成文档
 
 > 使用 [typedoc](https://typedoc.org/) 生成，文档会生成在项目根目录的 doc 目录
@@ -76,19 +82,7 @@ npm run doc
 
 即确保本地的修改已全部提交（git status 的时候会显示：`nothing to commit, working tree clean` ），否则会导致执行 `release:local` 脚本失败
 
-## 1.执行本地构建脚本
-
-```sh
-npm run build
-```
-
-> 该脚本内部会做以下事情：
-
-1. 根据 meta/packages.ts，删除 packages 里对应的包的 dist
-2. 根据 meta/packages.ts，打包 packages 里对应的包，生成 dist
-3. 根据 meta/packages.ts，复制 packages 里对应的包的 package.json 和 README.md，以及项目根目录的 LICENSE 文件，复制到对应包的 dist
-
-## 2.执行本地发版脚本
+## 1.执行本地发版脚本
 
 ```sh
 npm run release:local
@@ -97,11 +91,12 @@ npm run release:local
 > 该脚本内部会做以下事情：
 
 1. 根据用户选择的版本以及 meta/packages.ts，更新对应 packages 里的包的 package.json 的 version
-2. 对比当前版本与上个版本的差异，生成 changelog
-3. 提交暂存区到本地仓库：git commit -m 'chore(release): v 当前版本'
-4. 生成当前版本 tag：git tag v 当前版本
+2. 开始构建 packages 里的包
+3. 对比当前版本与上个版本的差异，生成 changelog
+4. 提交暂存区到本地仓库：git commit -m 'chore(release): v 当前版本'
+5. 生成当前版本 tag：git tag v 当前版本
 
-## 3.执行线上发版脚本
+## 2.执行线上发版脚本
 
 ```sh
 npm run release:online

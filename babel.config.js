@@ -1,9 +1,16 @@
 const chalk = require('chalk');
 
+const pkg = require('../package.json');
+
 console.log(
   `${chalk.bgBlueBright.black(' INFO ')} ${chalk.blueBright(
     `读取了: ${__filename.slice(__dirname.length + 1)}`
   )}`
+);
+
+const babelRuntimeVersion = pkg.dependencies['@babel/runtime-corejs3'].replace(
+  /^[^0-9]*/,
+  ''
 );
 
 module.exports = {
@@ -54,7 +61,7 @@ module.exports = {
          */
         helpers: true,
         regenerator: true, // 切换生成器函数是否转换为使用不污染全局范围的再生器运行时。默认为true
-        // version: '7.0.0-beta.0',
+        version: babelRuntimeVersion,
       },
     ],
   ],
