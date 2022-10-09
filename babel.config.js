@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 
-const pkg = require('../package.json');
+const pkg = require('./package.json');
 
 console.log(
   `${chalk.bgBlueBright.black(' INFO ')} ${chalk.blueBright(

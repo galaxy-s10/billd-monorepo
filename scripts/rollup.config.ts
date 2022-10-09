@@ -12,8 +12,7 @@ import esbuild from 'rollup-plugin-esbuild';
 import { packages } from '../meta/packages';
 import pkg from '../package.json';
 
-import type { RollupOptions } from 'rollup';
-import type { OutputOptions } from 'rollup';
+import type { OutputOptions, RollupOptions } from 'rollup';
 import type { Options as ESBuildOptions } from 'rollup-plugin-esbuild';
 
 const watch = process.argv.includes('--watch');
