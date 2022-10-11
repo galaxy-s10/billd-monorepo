@@ -76,7 +76,7 @@ export const toKebabCase = (input: string): string =>
  * @return {*}
  */
 export const toCamelCased = (input: string): string =>
-  input.replace(/\-(\w)/g, function (all, letter) {
+  input.replace(/-(\w)/g, function (all, letter) {
     return letter.toUpperCase();
   });
 
@@ -87,7 +87,7 @@ export const toCamelCased = (input: string): string =>
  */
 export const toPascalCase = (input: string): string => {
   input.replace(input[0], input[0].toUpperCase());
-  return input.replace(/\-(\w)/g, function (all, letter) {
+  return input.replace(/-(\w)/g, function (all, letter) {
     return letter.toUpperCase();
   });
 };
@@ -134,31 +134,31 @@ export const deepClone = <T>(object: T): T => {
  * @param {boolean} leading 首次立即执行
  * @return {Promise}
  */
-export const debounce = (fn: Function, delay: number, leading = false) => {
+export const debounce = (fn: () => any, delay: number, leading = false) => {
   let timer;
-  const debounceFn = function () {
+  const debounceFn = function (...args) {
     if (timer) {
       clearTimeout(timer);
     }
-    // @ts-ignore
-    const that = this;
-    const args = arguments;
     return new Promise((resolve) => {
       if (leading) {
         let isFirst = false;
         if (!timer) {
-          resolve(fn.apply(that, args));
+          // @ts-ignore
+          resolve(fn.apply(this, args));
           isFirst = true;
         }
         timer = setTimeout(() => {
           timer = null;
           if (!isFirst) {
-            resolve(fn.apply(that, args));
+            // @ts-ignore
+            resolve(fn.apply(this, args));
           }
         }, delay);
       } else {
         timer = setTimeout(() => {
-          resolve(fn.apply(that, args));
+          // @ts-ignore
+          resolve(fn.apply(this, args));
         }, delay);
       }
     });
@@ -178,15 +178,11 @@ export const debounce = (fn: Function, delay: number, leading = false) => {
  * @param {boolean} trailing 最后一次执行
  * @return {Promise}
  */
-export const throttle = (fn: Function, interval: number, trailing = false) => {
+export const throttle = (fn: () => any, interval: number, trailing = false) => {
   let lastTime = 0;
   let timer;
-  return function () {
-    // @ts-ignore
-    const that = this;
-    const args = arguments;
+  return function (...args) {
     const newTime = new Date().getTime();
-
     if (timer) {
       clearTimeout(timer);
     }
@@ -194,13 +190,14 @@ export const throttle = (fn: Function, interval: number, trailing = false) => {
     let result;
     return new Promise((resolve) => {
       if (newTime - lastTime > interval) {
-        result = fn.apply(that, args);
+        // @ts-ignore
+        result = fn.apply(this, args);
         resolve(result);
-
         lastTime = newTime;
       } else if (trailing) {
         timer = setTimeout(() => {
-          result = fn.apply(that, args);
+          // @ts-ignore
+          result = fn.apply(this, args);
           resolve(result);
         }, interval);
       }

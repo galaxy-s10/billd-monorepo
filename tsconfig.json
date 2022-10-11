@@ -29,9 +29,11 @@
       "module": "CommonJS"
     }
   },
-  // "exclude": ["**/*.d.ts"],
+  "exclude": ["doc/**/*", "node_modules/**/*"], // 排除include里的文件
   "include": [
-    "packages/**/*.ts",
+    "./**/*.ts",
+    "./**/*.js",
+    ".eslintrc.js",
     "scripts/rollup.config.ts" //https://rollupjs.org/guide/en/#--configplugin-plugin
   ] // 仅仅匹配这些文件
 }

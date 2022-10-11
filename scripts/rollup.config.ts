@@ -24,7 +24,7 @@ const external = [...Object.keys(pkg.dependencies || {})].map((name) =>
 // my-name转化为MyName
 export const toPascalCase = (input: string): string => {
   input.replace(input[0], input[0].toUpperCase());
-  return input.replace(/\-(\w)/g, function (all, letter) {
+  return input.replace(/-(\w)/g, function (all, letter) {
     return letter.toUpperCase();
   });
 };

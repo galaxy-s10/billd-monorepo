@@ -23,8 +23,8 @@ const versionChoices = [
   ...(preId ? ['prepatch', 'preminor', 'premajor', 'prerelease'] : []),
 ];
 
-const inc = (i) => semver.inc(currentVersion, i, preId);
-let targetVersion;
+const inc = (i: string): string => semver.inc(currentVersion, i, preId);
+let targetVersion: string;
 
 const selectReleaseVersion = async () => {
   const { release } = await inquirer.prompt([
@@ -95,13 +95,15 @@ function gitIsClean() {
 }
 
 (async () => {
-  try {
-    await gitIsClean();
-    await selectReleaseVersion();
+  await gitIsClean();
+  await selectReleaseVersion();
+})().then(
+  () => {
     console.log(chalkSUCCESS(`本地发布v${targetVersion}成功！`));
-  } catch (error) {
+  },
+  (rej) => {
     console.log(chalkERROR(`！！！本地发布v${targetVersion}失败！！！`));
-    console.log(error);
+    console.log(rej);
     console.log(chalkERROR(`！！！本地发布v${targetVersion}失败！！！`));
   }
-})();
+);

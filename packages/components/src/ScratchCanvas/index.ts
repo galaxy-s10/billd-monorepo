@@ -13,9 +13,9 @@ export class ScratchCanvas {
       /** 结果图片 */
       resultImg?: string;
       /** 完成回调 */
-      onFinsh?: Function;
+      onFinsh?: () => any;
       /** 结果图片点击 */
-      resultImgClick?: Function;
+      resultImgClick?: () => any;
     }
   ) {
     function getStyle(obj, name) {
