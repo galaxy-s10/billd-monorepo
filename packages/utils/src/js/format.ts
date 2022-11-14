@@ -1,7 +1,7 @@
 /**
- * @description 格式化内存大小（要求传入的数字以byte为单位）
+ * @description 格式化内存大小(要求传入的数字以byte为单位)
  * @param {number} val
- * @param {*} num 显示几位小数，默认2
+ * @param {*} num 显示几位小数,默认2
  * @return {*}
  */
 export const formatMemorySize = (val: number, num = 2) => {

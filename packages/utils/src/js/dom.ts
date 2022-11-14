@@ -1,6 +1,6 @@
 /**
- * @description 获取dom元素的样式值，注意：如果获取的样式值没有显示的声明，
- * 会获取到它的默认值，比如position没有设置值，获取它的position就会返回static
+ * @description 获取dom元素的样式值,注意:如果获取的样式值没有显示的声明,
+ * 会获取到它的默认值,比如position没有设置值,获取它的position就会返回static
  * @param {Element} ele
  * @param {*} styleName
  * @return {*}

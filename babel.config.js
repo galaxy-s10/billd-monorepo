@@ -59,8 +59,8 @@ module.exports = {
          * 份runtime包里面的代码，但是他们在不同的文件（模块）里面，都有自己的作用域，因此在使用类似webpack之类的
          * 打包工具打包的时候，不会做优化。因此推荐设置true，这样可以通过静态分析的手段进行打包，减少打包后的代码体积。
          */
-        helpers: true,
-        regenerator: true, // 切换生成器函数是否转换为使用不污染全局范围的再生器运行时。默认为true
+        helpers: true, // 当helpers设置true的时候，babelHelpers需要设置为runtime
+        // helpers: false, // 当helpers设置false的时候，babelHelpers需要设置为bundled
         version: babelRuntimeVersion,
       },
     ],

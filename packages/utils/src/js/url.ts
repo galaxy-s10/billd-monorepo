@@ -1,11 +1,11 @@
 /**
- * @description 获取地址栏参数（注意：请提前对url进行decodeURI或decodeURIComponent解码）
+ * @description 获取地址栏参数(注意:请提前对url进行decodeURI或decodeURIComponent解码)
  * @return {*}
  */
-export const getUrlParams = () => {
+export const getUrlParams = (key?: string) => {
   const url = window.location.href;
   const str = url.split('?')[1];
-  const obj: any = {};
+  const obj = {};
   if (str) {
     const keys = str.split('&');
     keys.forEach((item) => {
@@ -13,5 +13,5 @@ export const getUrlParams = () => {
       obj[arr[0]] = arr[1];
     });
   }
-  return obj;
+  return key ? obj[key] : obj;
 };

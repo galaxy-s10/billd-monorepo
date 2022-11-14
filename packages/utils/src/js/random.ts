@@ -39,6 +39,6 @@ export const getRandomString = (length: number): string => {
  * @return {*}
  */
 export const getRandomInt = (length: number) => {
-  if (length > 16 || length < 1) throw new Error('length的范围：[1,16]');
+  if (length > 16 || length < 1) throw new Error('length的范围:[1,16]');
   return +`${Math.random()}`.slice(2, 2 + length);
 };

@@ -53,13 +53,13 @@ npm install '@huangshuisheng/components';
 > 本地调试不会构建 umd
 
 ```sh
-npm run dev
+pnpm run dev
 ```
 
 # 本地构建
 
 ```sh
-npm run build
+pnpm run build
 ```
 
 > 该脚本内部会做以下事情：
@@ -73,7 +73,7 @@ npm run build
 > 使用 [typedoc](https://typedoc.org/) 生成，文档会生成在项目根目录的 doc 目录
 
 ```sh
-npm run doc
+pnpm run doc
 ```
 
 # 如何发版
@@ -85,7 +85,7 @@ npm run doc
 ## 1.执行本地发版脚本
 
 ```sh
-npm run release:local
+pnpm run release:local
 ```
 
 > 该脚本内部会做以下事情：
@@ -99,7 +99,7 @@ npm run release:local
 ## 2.执行线上发版脚本
 
 ```sh
-npm run release:online
+pnpm run release:online
 ```
 
 > 该脚本内部会做以下事情：

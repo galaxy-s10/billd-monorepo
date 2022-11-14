@@ -37,7 +37,7 @@ export class CacheModel {
   };
 
   /**
-   * @description 获取缓存，如果缓存已过期，会清除该缓存并返回null
+   * @description 获取缓存,如果缓存已过期,会清除该缓存并返回null
    * @param {*} key
    */
   getStorageExp = (key: string) => {
@@ -45,7 +45,7 @@ export class CacheModel {
       // @ts-ignore
       const storage = JSON.parse(localStorage.getItem(key));
       if (storage) {
-        // 如果缓存的expireTime小于当前时间，则代表已过期
+        // 如果缓存的expireTime小于当前时间,则代表已过期
         const isExpires = storage.expireTime < +new Date();
         if (isExpires) {
           this.clearStorage(key);
@@ -64,7 +64,7 @@ export class CacheModel {
    * @description 设置缓存以及缓存时长
    * @param {*} key
    * @param {*} value
-   * @param {*} expires 缓存时长，单位：小时
+   * @param {*} expires 缓存时长,单位:小时
    */
   setStorageExp = (key: string, value: any, expires: number) => {
     try {

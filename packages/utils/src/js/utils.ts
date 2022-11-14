@@ -1,4 +1,37 @@
 /**
+ * @description 让系统卡死一段时间
+ * @param {*} duration
+ * @return {*}
+ */
+export const sleep = (duration = 1000) => {
+  const oldTime = +new Date();
+  // eslint-disable-next-line
+  for (; +new Date() - oldTime < duration; ) {}
+};
+
+/**
+ * @description 按屏幕375为基准,生成对应的px值,默认返回单位(px)
+ * @param {number} val
+ * @param {*} flag
+ * @return {*}
+ */
+export const pxToDesignPx = (val: number, flag = true) => {
+  const px = window.screen.availWidth * (val / 375);
+  return flag ? `${px}px` : px;
+};
+
+/**
+ * @description 按屏幕375为基准,生成对应的vw值,默认返回单位(vw)
+ * @param {number} val
+ * @param {*} flag
+ * @return {*}
+ */
+export const pxToDesignVw = (val: number, flag = true) => {
+  const vw = ((val / 375) * 100).toFixed(5);
+  return flag ? `${vw}vw` : vw;
+};
+
+/**
  * @description 删除对象中值为: null, undefined, NaN, ''的属性
  * @param {any} obj
  * @return {*}
