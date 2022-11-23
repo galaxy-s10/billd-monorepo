@@ -1,4 +1,21 @@
 /**
+ * @description: 是否支持0.5px
+ * @return {*}
+ */
+export const supportHairlines = () => {
+  const fakeBody = document.createElement('body');
+  const testElement = document.createElement('div');
+  testElement.style.border = '.5px solid transparent';
+  fakeBody.appendChild(testElement);
+  document.documentElement.appendChild(fakeBody);
+  if (testElement.offsetHeight === 1) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+/**
  * @description 让系统卡死一段时间
  * @param {*} duration
  * @return {*}
@@ -16,7 +33,10 @@ export const sleep = (duration = 1000) => {
  * @return {*}
  */
 export const pxToDesignPx = (val: number, flag = true) => {
-  const px = window.screen.availWidth * (val / 375);
+  // window.screen.availWidth，值是固定的，怎么跳转浏览器大小，值都是屏幕的大小
+  // window.document.documentElement.clientWidth，值是不定的，根据文档宽度决定
+  // window.screen和window.document兼容性一致，兼容ie6及以上，不兼容安卓4.3及以下，其余基本没有兼容性问题。
+  const px = window.document.documentElement.clientWidth * (val / 375);
   return flag ? `${px}px` : px;
 };
 

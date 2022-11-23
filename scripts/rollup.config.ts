@@ -163,8 +163,8 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
                * 份runtime包里面的代码，但是他们在不同的文件（模块）里面，都有自己的作用域，因此在使用类似webpack之类的
                * 打包工具打包的时候，不会做优化。因此推荐设置true，这样可以通过静态分析的手段进行打包，减少打包后的代码体积。
                */
-              // helpers: true, // 当helpers设置true的时候，babelHelpers需要设置为runtime
-              helpers: false, // 当helpers设置false的时候，babelHelpers需要设置为bundled
+              helpers: true, // 当helpers设置true的时候，babelHelpers需要设置为runtime
+              // helpers: false, // 当helpers设置false的时候，babelHelpers需要设置为bundled
               version: babelRuntimeVersion,
             },
           ],
@@ -178,8 +178,8 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
          * 在打包esm和cjs时,使用runtime,并且配合external
          * 在打包umd时,使用bundled,并且不要用external
          */
-        babelHelpers: 'bundled', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
-        // babelHelpers: 'runtime', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
+        // babelHelpers: 'bundled', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
+        babelHelpers: 'runtime', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
       }),
     ];
     umdConfig.push({
