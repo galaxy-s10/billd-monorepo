@@ -163,8 +163,8 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
                * 份runtime包里面的代码，但是他们在不同的文件（模块）里面，都有自己的作用域，因此在使用类似webpack之类的
                * 打包工具打包的时候，不会做优化。因此推荐设置true，这样可以通过静态分析的手段进行打包，减少打包后的代码体积。
                */
-              helpers: true, // 当helpers设置true的时候，babelHelpers需要设置为runtime
-              // helpers: false, // 当helpers设置false的时候，babelHelpers需要设置为bundled
+              // helpers: true, // 当helpers设置true的时候，babelHelpers需要设置为runtime
+              helpers: false, // 当helpers设置false的时候，babelHelpers需要设置为bundled
               version: babelRuntimeVersion,
             },
           ],
@@ -178,8 +178,8 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
          * 在打包esm和cjs时,使用runtime,并且配合external
          * 在打包umd时,使用bundled,并且不要用external
          */
-        // babelHelpers: 'bundled', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
-        babelHelpers: 'runtime', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
+        babelHelpers: 'bundled', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
+        // babelHelpers: 'runtime', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
       }),
     ];
     umdConfig.push({
@@ -194,18 +194,18 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
       // external: umdExternal,
       plugins: [...umdConfigPlugins],
     });
-    // umdConfig.push({
-    //   input,
-    //   output: {
-    //     // sourcemap: true, // 开启sourcemap比较耗费性能
-    //     file: path.resolve(__dirname, `packages/${name}/dist/index.min.js`),
-    //     format: 'umd',
-    //     globals,
-    //     name: toPascalCase(`Billd-${name}`),
-    //   },
-    //   // external: umdExternal,
-    //   plugins: [...umdConfigPlugins, esbuildPlugin({ minify: true })],
-    // });
+    umdConfig.push({
+      input,
+      output: {
+        // sourcemap: true, // 开启sourcemap比较耗费性能
+        file: path.resolve(__dirname, `packages/${name}/dist/index.min.js`),
+        format: 'umd',
+        globals,
+        name: toPascalCase(`Billd-${name}`),
+      },
+      // external: umdExternal,
+      plugins: [...umdConfigPlugins, esbuildPlugin({ minify: true })],
+    });
   }
 
   configs.push({
@@ -215,21 +215,47 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
     plugins: [
       ...plugins,
       babel({
-        exclude: 'node_modules/**', // 只编译我们的源代码
+        exclude: 'node_modules/**', // 只编译我们的源代码，最好加上它，否则打包umd可能会报错
         extensions: [...DEFAULT_EXTENSIONS, '.ts'],
-        /**
-         * 这里设置plugins会覆盖babel.config.js的plugins，
-         * 因此不设置这里的plugins，让它读取babel.config.js的plugins
-         */
-        // plugins: [],
+        // 这里面的plugins如果和babel.config.js里的plugins冲突，
+        // 会执行这里的plugins，不会执行babel.config.js里的plugins
+        plugins: [
+          [
+            /**
+             * @babel/plugin-transform-runtime
+             * useBuiltIns和polyfill选项在 v7 中被删除，只是将其设为默认值。
+             */
+            '@babel/plugin-transform-runtime',
+            {
+              // absoluteRuntime: false, // boolean或者string，默认为false。
+              /**
+               * corejs:false, 2,3或{ version: 2 | 3, proposals: boolean }, 默认为false
+               * 设置对应值需要安装对应的包：
+               * false	npm install --save @babel/runtime
+               * 2	npm install --save @babel/runtime-corejs2
+               * 3	npm install --save @babel/runtime-corejs3
+               */
+              corejs: 3,
+              /**
+               * helpers: boolean, 默认true。在纯babel的情况下：
+               * 如果是true，就会把需要他runtime包给引进来，如：import _defineProperty from "@babel/runtime/helpers/defineProperty"
+               * 如果是false，就会把需要的runtime包里面的代码给嵌进bundle里，如function _defineProperty(){}
+               * 设置false的话，会导致同一个runtime包里面的代码被很多文件设置，产生冗余的代码。而且因为虽然是同一
+               * 份runtime包里面的代码，但是他们在不同的文件（模块）里面，都有自己的作用域，因此在使用类似webpack之类的
+               * 打包工具打包的时候，不会做优化。因此推荐设置true，这样可以通过静态分析的手段进行打包，减少打包后的代码体积。
+               */
+              helpers: true, // 当helpers设置true的时候，babelHelpers需要设置为runtime
+              // helpers: false, // 当helpers设置false的时候，babelHelpers需要设置为bundled
+              // regenerator: true, // 切换生成器函数是否转换为使用不污染全局范围的再生器运行时。默认为true
+              version: babelRuntimeVersion,
+            },
+          ],
+        ],
         /**
          * babelHelpers,建议显式配置此选项（即使使用其默认值）
          * runtime: 您应该使用此功能，尤其是在使用汇总构建库时，它结合external使用
          * bundled: 如果您希望生成的捆绑包包含这些帮助程序（每个最多一份），您应该使用它。特别是在捆绑应用程序代码时很有用
-         * 如果babelHelpers设置成bundled，@babel/plugin-transform-runtime的helpers得设置false！
-         * 如果babelHelpers设置成runtime，@babel/plugin-transform-runtime的helpers得设置true！
-         * 在打包esm和cjs时,使用runtime,并且配合external
-         * 在打包umd时,使用bundled,并且不要用external
+         * 在打包esm和cjs时,使用runtime,并且配合external;在打包umd时,使用bundled,并且不要用external
          */
         // babelHelpers: 'bundled', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
         babelHelpers: 'runtime', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
