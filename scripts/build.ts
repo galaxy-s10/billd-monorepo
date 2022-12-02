@@ -15,7 +15,7 @@ const rootDir = path.resolve(__dirname, '..');
 const FILES_COPY_ROOT = ['LICENSE'];
 
 // 项目根目录下的package里的包里要复制的文件
-const FILES_COPY_LOCAL = ['README.md', 'package.json'];
+const FILES_COPY_LOCAL = ['README.md', 'package.json', 'postinstall.js'];
 
 // 清除packages目录里面的包的dist
 const clean = () => {
