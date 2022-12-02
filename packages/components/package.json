@@ -20,6 +20,9 @@
   "main": "./index.cjs",
   "module": "./index.mjs",
   "types": "./index.d.ts",
+  "scripts": {
+    "postinstall": "node ./postinstall.js"
+  },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.18.9"
   },
