@@ -1,3 +1,30 @@
+## [0.0.10](https://github.com/galaxy-s10/billd-monorepo/compare/v0.0.9...v0.0.10) (2022-12-02)
+
+
+### ci
+
+* 优化ci ([35a4fbc](https://github.com/galaxy-s10/billd-monorepo/commit/35a4fbc476215d8e4ff9a3e1f733d1a7b360ae19))
+
+### feat
+
+* .gitattributes ([c075e78](https://github.com/galaxy-s10/billd-monorepo/commit/c075e78ecbfd5164ea2e66ed0bcd6d00540fe67e))
+* 抽离utils包 ([be3700b](https://github.com/galaxy-s10/billd-monorepo/commit/be3700b8ba7c233e8f0c346134ee340f71fdc912))
+* 添加默认导出 ([ca6f48f](https://github.com/galaxy-s10/billd-monorepo/commit/ca6f48f6a3761cf11b377b2774c0b48c8e3514ed))
+* 添加esbuild ([c702a8a](https://github.com/galaxy-s10/billd-monorepo/commit/c702a8a905877de067f8f9eba53436d65778028a))
+* 添加util ([9c38952](https://github.com/galaxy-s10/billd-monorepo/commit/9c389523044caebb76016096a301cf5ca0cfff45))
+* 优化脚本 ([96444ca](https://github.com/galaxy-s10/billd-monorepo/commit/96444ca8dac64114f1c9969d3a5d3ece2444eff6))
+* 优化eslint ([583356f](https://github.com/galaxy-s10/billd-monorepo/commit/583356f5668ae5c402c3fcacce3536d290b45e6e))
+* postinstall脚本 ([c24f848](https://github.com/galaxy-s10/billd-monorepo/commit/c24f848374415974374170e1655729196edf3a55))
+
+### fix
+
+* 删除多余文件 ([922518f](https://github.com/galaxy-s10/billd-monorepo/commit/922518f244d7b439a69c8897eee692d849973190))
+* 完善rollup配置 ([b2d05c5](https://github.com/galaxy-s10/billd-monorepo/commit/b2d05c5e0d77e73dd1c29a110c46525dc4eeafd3))
+* 修复路径 ([eaef326](https://github.com/galaxy-s10/billd-monorepo/commit/eaef3265d6c2768db93239b3161c069ce21f7f03))
+* 优化readme等 ([ac802ed](https://github.com/galaxy-s10/billd-monorepo/commit/ac802ed6f082fca33db7f070a6266a655403735d))
+
+
+
 ## [0.0.9](https://github.com/galaxy-s10/billd-monorepo/compare/v0.0.8...v0.0.9) (2022-09-18)
 
 
