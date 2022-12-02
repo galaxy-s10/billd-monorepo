@@ -17,9 +17,9 @@
 </p>
 
 <div align="center">
-<a href="https://www.npmjs.com/package/@huangshuisheng/utils"><img src="https://img.shields.io/npm/v/@huangshuisheng/utils.svg" alt="Version"></a>
-<a href="https://www.npmjs.com/package/@huangshuisheng/utils"><img src="https://img.shields.io/npm/dw/@huangshuisheng/utils.svg" alt="Downloads"></a>
-<a href="https://www.npmjs.com/package/@huangshuisheng/utils"><img src="https://img.shields.io/npm/l/@huangshuisheng/utils.svg" alt="License"></a>
+<a href="https://www.npmjs.com/package/@huangshuisheng/hooks"><img src="https://img.shields.io/npm/v/@huangshuisheng/hooks.svg" alt="Version"></a>
+<a href="https://www.npmjs.com/package/@huangshuisheng/hooks"><img src="https://img.shields.io/npm/dw/@huangshuisheng/hooks.svg" alt="Downloads"></a>
+<a href="https://www.npmjs.com/package/@huangshuisheng/hooks"><img src="https://img.shields.io/npm/l/@huangshuisheng/hooks.svg" alt="License"></a>
 </div>
 
 # 简介
@@ -28,7 +28,6 @@
 
 | 包名                                                                                                       | 版本                                                                                                                        |
 | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| [@huangshuisheng/utils](https://github.com/galaxy-s10/billd-monorepo/tree/master/packages/utils)           | [![npm](https://img.shields.io/npm/v/@huangshuisheng/utils)](https://www.npmjs.com/package/@huangshuisheng/utils)           |
 | [@huangshuisheng/components](https://github.com/galaxy-s10/billd-monorepo/tree/master/packages/components) | [![npm](https://img.shields.io/npm/v/@huangshuisheng/components)](https://www.npmjs.com/package/@huangshuisheng/components) |
 | [@huangshuisheng/hooks](https://github.com/galaxy-s10/billd-monorepo/tree/master/packages/hooks)           | [![npm](https://img.shields.io/npm/v/@huangshuisheng/hooks)](https://www.npmjs.com/package/@huangshuisheng/hooks)           |
 
@@ -37,7 +36,6 @@
 # 安装
 
 ```sh
-npm install '@huangshuisheng/utils';
 npm install '@huangshuisheng/hooks';
 npm install '@huangshuisheng/components';
 ```
