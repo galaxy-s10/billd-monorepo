@@ -13,20 +13,15 @@ import { packages } from '../meta/packages';
 import pkg from '../package.json';
 
 import type { OutputOptions, RollupOptions } from 'rollup';
-import type { Options as ESBuildOptions } from 'rollup-plugin-esbuild';
 
 const watch = process.argv.includes('--watch');
 
 // 这里的external只是根目录的package.json里的依赖，不包括package目录里的package.json
 // const external = [];
-const external = [...Object.keys(pkg.dependencies || {})].map((name) =>
-  RegExp(`^${name}($|/)`)
-);
-
-const umdExternal = [
-  ...external,
-  // 'element-ui'
-];
+const allExternal = [
+  ...Object.keys(pkg.dependencies || {}),
+  ...Object.keys(pkg.devDependencies || {}),
+].map((name) => RegExp(`^${name}($|/)`));
 
 // 全局模块，用于umd/iife包
 const globals = {
@@ -42,11 +37,10 @@ export const toPascalCase = (input: string): string => {
 };
 
 // esbuild替代了rollup-plugin-typescript2、@rollup/plugin-typescript、rollup-plugin-terser
-const esbuildPlugin = (options?: ESBuildOptions) =>
+const esbuildPlugin = (prod = false) =>
   esbuild({
-    minify: false,
+    minify: prod ? true : false,
     // sourceMap: true, // 默认就是true
-    ...options,
   });
 
 const configs: RollupOptions[] = [];
@@ -56,6 +50,7 @@ const babelRuntimeVersion = pkg.dependencies['@babel/runtime-corejs3'].replace(
   /^[^0-9]*/,
   ''
 );
+
 Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
   const input = path.resolve(__dirname, `packages/${name}/index.ts`);
   const output: OutputOptions[] = [];
@@ -89,7 +84,6 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
      * 当前的billd-monorepo里面的源码基本都并没有依赖第三方的包，因此也不需要用@rollup/plugin-node-resolve插件
      */
     nodeResolve(),
-    esbuildPlugin(),
     json(),
   ];
 
@@ -120,100 +114,109 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
       format: 'cjs',
       /**
        * exports默认值是auto，可选：default、none。https://rollupjs.org/guide/zh/#exports
-       * 我们源代码使用了esm，而且默认导出和具名导出一起使用了，编译的时候会报警告(!) Mixing named and default exports
-       * 设置exports: 'named'就不会报警告了
+       * 如果我们源代码默认导出和具名导出一起使用，编译的时候会报警告(!) Mixing named and default exports
+       * 设置exports: 'named'就不会报警告了（实际上只是不会报警告了，设不设置named对实际打包的结果都没影响）
+       * 如果我们源代码没有默认导出和具名导出一起使用，但是设置了exports: 'named'，会生成：exports["default"] = BilldUtils;
+       * 别人通过cjs导入的话，就得const BilldUtils = require("billd-utils").default;才能拿到默认导出；如果不使用exports: 'named'，
+       * 默认会生成：module.exports = BilldUtils;别人通过cjs导入的话，就正常的const BilldUtils = require("billd-utils");即可
        */
       exports: 'named',
     });
   }
 
   if (umd !== false && !watch) {
-    const umdConfigPlugins = [
-      ...plugins,
-      babel({
-        exclude: 'node_modules/**', // 只编译我们的源代码
-        extensions: [...DEFAULT_EXTENSIONS, '.ts'],
-        /**
-         * 这里设置plugins会覆盖babel.config.js的plugins
-         */
+    const config = (prod = false): RollupOptions => {
+      return {
+        input,
+        output: {
+          // sourcemap: true, // 开启sourcemap比较耗费性能
+          file: path.resolve(
+            __dirname,
+            prod
+              ? `packages/${name}/dist/index.min.js`
+              : `packages/${name}/dist/index.js`
+          ),
+          format: 'umd',
+          /**
+           * exports默认值是auto，可选：default、none。https://rollupjs.org/guide/zh/#exports
+           * 如果我们源代码默认导出和具名导出一起使用，编译的时候会报警告(!) Mixing named and default exports
+           * 设置exports: 'named'就不会报警告了（实际上只是不会报警告了，设不设置named对实际打包的结果都没影响）
+           * 如果我们源代码没有默认导出和具名导出一起使用，但是设置了exports: 'named'，会生成：exports["default"] = BilldUtils;
+           * 别人通过cjs导入的话，就得const BilldUtils = require("billd-utils").default;才能拿到默认导出；如果不使用exports: 'named'，
+           * 默认会生成：module.exports = BilldUtils;别人通过cjs导入的话，就正常的const BilldUtils = require("billd-utils");即可
+           */
+          exports: 'named',
+          globals,
+          name: toPascalCase(`Billd-${name}`),
+        },
         plugins: [
-          [
+          ...plugins,
+          esbuildPlugin(prod),
+          babel({
+            exclude: 'node_modules/**', // 只编译我们的源代码
+            extensions: [...DEFAULT_EXTENSIONS, '.ts'],
             /**
-             * @babel/plugin-transform-runtime
-             * useBuiltIns和polyfill选项在 v7 中被删除，只是将其设为默认值。
+             * 这里设置plugins会覆盖babel.config.js的plugins
              */
-            '@babel/plugin-transform-runtime',
-            {
-              // absoluteRuntime: false, // boolean或者string，默认为false。
+            plugins: [
+              [
+                /**
+                 * @babel/plugin-transform-runtime
+                 * useBuiltIns和polyfill选项在 v7 中被删除，只是将其设为默认值。
+                 */
+                '@babel/plugin-transform-runtime',
+                {
+                  // absoluteRuntime: false, // boolean或者string，默认为false。
 
-              /**
-               * corejs:false, 2,3或{ version: 2 | 3, proposals: boolean }, 默认为false
-               * 设置对应值需要安装对应的包：
-               * false	npm install --save @babel/runtime
-               * 2	npm install --save @babel/runtime-corejs2
-               * 3	npm install --save @babel/runtime-corejs3
-               */
-              corejs: 3,
+                  /**
+                   * corejs:false, 2,3或{ version: 2 | 3, proposals: boolean }, 默认为false
+                   * 设置对应值需要安装对应的包：
+                   * false	npm install --save @babel/runtime
+                   * 2	npm install --save @babel/runtime-corejs2
+                   * 3	npm install --save @babel/runtime-corejs3
+                   */
+                  corejs: 3,
 
-              /**
-               * helpers: boolean, 默认true。在纯babel的情况下：
-               * 如果是true，就会把需要他runtime包给引进来，如：import _defineProperty from "@babel/runtime/helpers/defineProperty"
-               * 如果是false，就会把需要的runtime包里面的代码给嵌进bundle里，如function _defineProperty(){}
-               * 设置false的话，会导致同一个runtime包里面的代码被很多文件设置，产生冗余的代码。而且因为虽然是同一
-               * 份runtime包里面的代码，但是他们在不同的文件（模块）里面，都有自己的作用域，因此在使用类似webpack之类的
-               * 打包工具打包的时候，不会做优化。因此推荐设置true，这样可以通过静态分析的手段进行打包，减少打包后的代码体积。
-               */
-              // helpers: true, // 当helpers设置true的时候，babelHelpers需要设置为runtime
-              helpers: false, // 当helpers设置false的时候，babelHelpers需要设置为bundled
-              version: babelRuntimeVersion,
-            },
-          ],
+                  /**
+                   * helpers: boolean, 默认true。在纯babel的情况下：
+                   * 如果是true，就会把需要他runtime包给引进来，如：import _defineProperty from "@babel/runtime/helpers/defineProperty"
+                   * 如果是false，就会把需要的runtime包里面的代码给嵌进bundle里，如function _defineProperty(){}
+                   * 设置false的话，会导致同一个runtime包里面的代码被很多文件设置，产生冗余的代码。而且因为虽然是同一
+                   * 份runtime包里面的代码，但是他们在不同的文件（模块）里面，都有自己的作用域，因此在使用类似webpack之类的
+                   * 打包工具打包的时候，不会做优化。因此推荐设置true，这样可以通过静态分析的手段进行打包，减少打包后的代码体积。
+                   */
+                  // helpers: true, // 当helpers设置true的时候，babelHelpers需要设置为runtime
+                  helpers: false, // 当helpers设置false的时候，babelHelpers需要设置为bundled
+                  version: babelRuntimeVersion,
+                },
+              ],
+            ],
+            /**
+             * babelHelpers,建议显式配置此选项（即使使用其默认值）
+             * runtime: 您应该使用此功能，尤其是在使用汇总构建库时，它结合external使用
+             * bundled: 如果您希望生成的捆绑包包含这些帮助程序（每个最多一份），您应该使用它。特别是在捆绑应用程序代码时很有用
+             * 如果babelHelpers设置成bundled，@babel/plugin-transform-runtime的helpers得设置false！
+             * 如果babelHelpers设置成runtime，@babel/plugin-transform-runtime的helpers得设置true！
+             * 在打包esm和cjs时,使用runtime,并且配合external;在打包umd时,使用bundled,并且不要用external,如果打包umd时使
+             * 用了runtime但是没有配置external，会导致打包重复的polyfill，虽然打包的时候不报错，但是引入包使用的时候会报错
+             */
+            babelHelpers: 'bundled', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
+            // babelHelpers: 'runtime', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
+          }),
         ],
-        /**
-         * babelHelpers,建议显式配置此选项（即使使用其默认值）
-         * runtime: 您应该使用此功能，尤其是在使用汇总构建库时，它结合external使用
-         * bundled: 如果您希望生成的捆绑包包含这些帮助程序（每个最多一份），您应该使用它。特别是在捆绑应用程序代码时很有用
-         * 如果babelHelpers设置成bundled，@babel/plugin-transform-runtime的helpers得设置false！
-         * 如果babelHelpers设置成runtime，@babel/plugin-transform-runtime的helpers得设置true！
-         * 在打包esm和cjs时,使用runtime,并且配合external
-         * 在打包umd时,使用bundled,并且不要用external
-         */
-        babelHelpers: 'bundled', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
-        // babelHelpers: 'runtime', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
-      }),
-    ];
-    umdConfig.push({
-      input,
-      output: {
-        file: path.resolve(__dirname, `packages/${name}/dist/index.js`),
-        format: 'umd',
-        globals,
-        name: toPascalCase(`Billd-${name}`),
-      },
-      // external: [/@babel\/runtime/],
-      // external: umdExternal,
-      plugins: [...umdConfigPlugins],
-    });
-    umdConfig.push({
-      input,
-      output: {
-        // sourcemap: true, // 开启sourcemap比较耗费性能
-        file: path.resolve(__dirname, `packages/${name}/dist/index.min.js`),
-        format: 'umd',
-        globals,
-        name: toPascalCase(`Billd-${name}`),
-      },
-      // external: umdExternal,
-      plugins: [...umdConfigPlugins, esbuildPlugin({ minify: true })],
-    });
+      };
+    };
+    umdConfig.push(config());
+    umdConfig.push(config(true));
   }
 
   configs.push({
     input,
     output,
-    external,
+    external: allExternal,
     plugins: [
       ...plugins,
+      esbuildPlugin(false),
       babel({
         exclude: 'node_modules/**', // 只编译我们的源代码，最好加上它，否则打包umd可能会报错
         extensions: [...DEFAULT_EXTENSIONS, '.ts'],
@@ -255,7 +258,10 @@ Object.values(packages).forEach(({ name, esm, cjs, umd, dts }) => {
          * babelHelpers,建议显式配置此选项（即使使用其默认值）
          * runtime: 您应该使用此功能，尤其是在使用汇总构建库时，它结合external使用
          * bundled: 如果您希望生成的捆绑包包含这些帮助程序（每个最多一份），您应该使用它。特别是在捆绑应用程序代码时很有用
-         * 在打包esm和cjs时,使用runtime,并且配合external;在打包umd时,使用bundled,并且不要用external
+         * 如果babelHelpers设置成bundled，@babel/plugin-transform-runtime的helpers得设置false！
+         * 如果babelHelpers设置成runtime，@babel/plugin-transform-runtime的helpers得设置true！
+         * 在打包esm和cjs时,使用runtime,并且配合external;在打包umd时,使用bundled,并且不要用external,如果打包umd时使
+         * 用了runtime但是没有配置external，会导致打包重复的polyfill，虽然打包的时候不报错，但是引入包使用的时候会报错
          */
         // babelHelpers: 'bundled', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
         babelHelpers: 'runtime', // 默认bundled,可选:"bundled" | "runtime" | "inline" | "external" | undefined
