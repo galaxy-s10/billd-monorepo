@@ -36,8 +36,8 @@
 # 安装
 
 ```sh
-npm install '@huangshuisheng/hooks';
-npm install '@huangshuisheng/components';
+npm install @huangshuisheng/hooks
+npm install @huangshuisheng/components
 ```
 
 # 使用
